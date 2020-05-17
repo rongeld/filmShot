@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import { Switch } from 'react-router-dom';
+import { Route, useLocation, Redirect } from 'react-router-dom';
+
+import GlobalStyle from './styles/global-styles';
+import ProtectedRoute from './components/routes/ProtectedRoute';
+
+import Landing from './pages/landing/Landing';
+import Dashboard from './pages/dashboard/Dashboard';
+import Header from './components/header/Header';
 
 function App() {
+  const { pathname } = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <GlobalStyle />
+      <div className="app-wrapper">
+        <div className="app-body">
+          <Route render={() => pathname !== '/landing' && <Header />} />
+          <Switch>
+            <Route path="/landing" component={Landing} />
+            <ProtectedRoute path="/dashboard" exact component={Dashboard} />
+            <Redirect to="/landing" />
+          </Switch>
+        </div>
+      </div>
+    </Fragment>
   );
 }
 
