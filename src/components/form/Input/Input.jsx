@@ -1,10 +1,24 @@
 import React from 'react';
+import { InputWrapper, Icon, InputForm } from './InputStyles';
 
-import { InputWrapper, InputForm } from './InputStyles';
-
-const Input = ({ handleChange, ...otherProps }) => (
-  <InputWrapper>
-    <InputForm onChange={handleChange} {...otherProps} />
+const Input = ({
+  width,
+  invert = false,
+  register,
+  required,
+  error,
+  data,
+  icon,
+  children,
+  ...otherProps
+}) => (
+  <InputWrapper width={width} invert={invert} error={error}>
+    <Icon>{children}</Icon>
+    <InputForm
+      ref={register && register(data || { required })}
+      invert={invert}
+      {...otherProps}
+    />
   </InputWrapper>
 );
 

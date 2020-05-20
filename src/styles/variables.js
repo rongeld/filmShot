@@ -15,6 +15,7 @@ export default {
   'black-soft': '#333333',
   navy: '#3b5998',
   pink: '#FF69B4',
+  error: '#F64668',
   violet: '#9933cc',
   olive: '#559137',
   green: '#008000',
