@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   overflow: hidden;
-  background: grey;
+  background: #bcbcbc;
   border-radius: 50px;
   width: 35px;
   height: 35px;

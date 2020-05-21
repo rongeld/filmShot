@@ -18,7 +18,7 @@ const Header = () => (
         <NavLink to="/notifications">Notifications</NavLink>
       </Nav>
       <Logo />
-      <FlexBox align-items="center" position="relative">
+      <FlexBox align-items="center" align-self="center" position="relative">
         <Input type="text" name="search" placeholder="Search">
           <GoSearch />
         </Input>

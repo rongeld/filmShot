@@ -1,0 +1,20 @@
+import styled from 'styled-components';
+
+export const Header = styled.div`
+  position: relative;
+  border: 10px solid rgba(198, 165, 107, 0.3);
+  background: #bcbcbc;
+  height: 115px;
+
+  & > div {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 60%) scale(2);
+    bottom: 0;
+  }
+`;
+export const Quote = styled.div`
+  position: relative;
+  text-align: center;
+  padding: 10px 30px 30px;
+`;
