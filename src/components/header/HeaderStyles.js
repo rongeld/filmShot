@@ -3,8 +3,10 @@ import variables from 'styles/variables';
 
 export const HeaderWrapper = styled.header`
   background: white;
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
   height: 70px;
+  position: fixed;
+  width: 100%;
 `;
 export const Nav = styled.nav`
   display: flex;

@@ -3,8 +3,12 @@ import variables from 'styles/variables';
 
 export const Wrapper = styled.main`
   background: ${variables['bg-color']};
-  padding: 30px;
-  min-height: calc(100vh - 70px);
+  padding: 100px 30px 30px;
+  min-height: 100vh;
+
+  & > div > *:not(:last-child) {
+    margin-right: 30px;
+  }
 `;
 export const Aside = styled.aside`
   flex: 1;

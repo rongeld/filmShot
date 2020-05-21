@@ -4,7 +4,7 @@ export const Header = styled.div`
   position: relative;
   border: 10px solid rgba(198, 165, 107, 0.3);
   background: #bcbcbc;
-  height: 115px;
+  height: 130px;
 
   & > div {
     position: absolute;
