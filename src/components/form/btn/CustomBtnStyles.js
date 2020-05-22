@@ -14,6 +14,13 @@ const invertedButtonStyles = css`
   background-color: ${variables['white']};
   color: ${variables['theme-color']};
 `;
+const sharedBtnStyles = css`
+  position: absolute;
+  border-radius: 50px;
+  right: 30px;
+  line-height: 28px;
+  padding: 5px 20px;
+`;
 
 const getButtonStyles = ({ inverted }) =>
   inverted ? invertedButtonStyles : buttonStyles;
@@ -26,10 +33,12 @@ export const CustomButtonContainer = styled.button`
   padding: 0 35px 0 35px;
   font-size: 15px;
   font-weight: bolder;
+  outline: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   transition: all 0.3s ease;
+  ${({ share }) => share && sharedBtnStyles};
   ${getButtonStyles}
 
   &:hover {

@@ -14,6 +14,10 @@ export default createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    img {
+      width: 100%;
+    }
   }
 `;
 
