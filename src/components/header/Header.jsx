@@ -18,8 +18,13 @@ const Header = () => (
         <NavLink to="/notifications">Notifications</NavLink>
       </Nav>
       <Logo />
-      <FlexBox align-items="center" position="relative">
-        <Input type="text" name="search" placeholder="Search">
+      <FlexBox
+        align-items="center"
+        position="relative"
+        width="23.5%"
+        justify-content="space-between"
+      >
+        <Input type="text" name="search" placeholder="Search" flex="1">
           <GoSearch />
         </Input>
         <ProfileDropdown />

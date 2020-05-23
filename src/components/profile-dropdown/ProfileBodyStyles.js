@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
   transform: translateY(0);
   top: 70px;
   width: 100%;
-  max-width: 250px;
   right: 0;
   background: white;
 

@@ -25,6 +25,7 @@ export const InputWrapper = styled.div`
   position: relative;
   width: ${({ width }) => (width ? `${width}%` : 'auto')};
   border: 1px solid transparent;
+  flex: ${({ flex }) => flex || 'initial'};
   ${({ error }) => (error ? borderStylesInvalid : borderStyles)}
 `;
 export const InputForm = styled.input`

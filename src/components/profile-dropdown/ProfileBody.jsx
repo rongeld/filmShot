@@ -17,7 +17,7 @@ const ProfileBody = () => (
       <BoxBody>
         <List>
           <li>
-            <Link to="/">
+            <Link to="/profile">
               <BsPerson />
               Profile
             </Link>

@@ -12,6 +12,9 @@ export const Wrapper = styled.main`
 `;
 export const Aside = styled.aside`
   flex: 1;
+  & > * {
+    margin-bottom: 30px;
+  }
 `;
 export const Feed = styled.div`
   flex: 2;

@@ -10,9 +10,10 @@ const Input = ({
   data,
   icon,
   children,
+  flex,
   ...otherProps
 }) => (
-  <InputWrapper width={width} invert={invert} error={error}>
+  <InputWrapper width={width} invert={invert} error={error} flex={flex}>
     <Icon>{children}</Icon>
     <InputForm
       ref={register && register(data || { required })}
