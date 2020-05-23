@@ -2,12 +2,16 @@ import React from 'react';
 import { Container } from 'components/shared/SharedStyles';
 import ProfileHead from 'components/profile-head/ProfileHead';
 
-const PhotosPage = () => {
+const FriendsPage = () => {
   return (
     <Container>
-      <ProfileHead title="Photos" amount={23} navs={['All', 'Most Popular']} />
+      <ProfileHead
+        title="Friends"
+        amount={23}
+        navs={['All', 'Recent', 'Request']}
+      />
     </Container>
   );
 };
 
-export default PhotosPage;
+export default FriendsPage;

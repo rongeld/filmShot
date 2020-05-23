@@ -9,6 +9,7 @@ import Landing from 'pages/landing/Landing';
 import Dashboard from 'pages/dashboard/Dashboard';
 import Header from 'components/header/Header';
 import Profile from 'pages/profile/Profile';
+import NotFoundPage from 'pages/not-found/NotFoundPage';
 
 function App() {
   const { pathname } = useLocation();
@@ -20,9 +21,14 @@ function App() {
         <Route render={() => pathname !== '/landing' && <Header />} />
         <Switch>
           <Route path="/landing" component={Landing} />
+          <ProtectedRoute
+            path="/"
+            exact
+            component={() => <Redirect to="/dashboard" />}
+          />
           <ProtectedRoute path="/dashboard" exact component={Dashboard} />
           <ProtectedRoute path="/profile" component={Profile} />
-          <Redirect to="/landing" />
+          <ProtectedRoute component={NotFoundPage} />
         </Switch>
       </AppWrapper>
     </Fragment>

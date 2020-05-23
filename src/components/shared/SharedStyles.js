@@ -8,6 +8,7 @@ export const Container = styled.div`
   padding: 0 20px;
   display: flex;
   justify-content: ${({ jc }) => jc || 'flex-start'};
+  flex-direction: ${({ column }) => (column ? 'column' : 'row')};
 `;
 
 export const FlexBox = styled.div`
@@ -26,5 +27,33 @@ export const Wrapper = styled.main`
 
   & > div > *:not(:last-child) {
     margin-right: 30px;
+  }
+`;
+
+export const Nav = styled.nav`
+  display: flex;
+  align-items: center;
+
+  a,
+  p {
+    display: block;
+    cursor: pointer;
+    color: ${variables['gray-color']};
+    font-size: 16px;
+    font-weight: ${({ small }) => (small ? '300' : '700')};
+    line-height: 1;
+    padding: ${({ small }) => (small ? '17px 0' : '21px 0')};
+    text-transform: capitalize;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+
+    &:not(:last-child) {
+      margin-right: ${({ small }) => (small ? '30px' : '50px')};
+    }
+
+    &.active,
+    &:hover {
+      color: ${variables['theme-color']};
+    }
   }
 `;

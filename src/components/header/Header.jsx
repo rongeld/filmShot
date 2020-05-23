@@ -7,7 +7,8 @@ import Logo from 'components/logo/Logo';
 import ProfileDropdown from 'components/profile-dropdown/ProfileDropdown';
 import Input from 'components/form/Input/Input';
 
-import { HeaderWrapper, Nav } from './HeaderStyles';
+import { HeaderWrapper, LogoWrapper } from './HeaderStyles';
+import { Nav } from 'components/shared/SharedStyles';
 
 const Header = () => (
   <HeaderWrapper>
@@ -17,7 +18,10 @@ const Header = () => (
         <NavLink to="/messages">Message</NavLink>
         <NavLink to="/notifications">Notifications</NavLink>
       </Nav>
-      <Logo />
+      <LogoWrapper>
+        <Logo />
+      </LogoWrapper>
+
       <FlexBox
         align-items="center"
         position="relative"

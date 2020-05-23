@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { IoIosOptions, IoMdShare } from 'react-icons/io';
 import { BsHeart } from 'react-icons/bs';
 import { AiOutlineWechat } from 'react-icons/ai';

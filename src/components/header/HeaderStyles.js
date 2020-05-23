@@ -9,6 +9,9 @@ export const HeaderWrapper = styled.header`
   z-index: 10;
   width: 100%;
 `;
+export const LogoWrapper = styled.div`
+  margin-left: -45px;
+`;
 export const Nav = styled.nav`
   display: flex;
   align-items: center;
