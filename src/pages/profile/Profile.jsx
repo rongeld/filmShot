@@ -1,17 +1,21 @@
 import React from 'react';
-import { NavLink, useRouteMatch } from 'react-router-dom';
+import { NavLink, useRouteMatch, Route } from 'react-router-dom';
 
 import profileImage from 'assets/profile-1.jpg';
 import profileBanner from 'assets/profile-banner.jpg';
-import { Route } from 'react-router-dom';
-import { Wrapper } from 'components/shared/SharedStyles';
-import { Nav, FlexBox, Container } from 'components/shared/SharedStyles';
-import { ProfileBG, UserPicWrapper, UserPic } from './ProfileStyles';
+import {
+  Nav,
+  FlexBox,
+  Container,
+  Wrapper
+} from 'components/shared/SharedStyles';
+
 import CustomBtn from 'components/form/btn/CustomBtn';
 
 import PhotosPage from 'pages/profile/photos-page/PhotosPage';
 import FriendsPage from 'pages/profile/friends-page/FriendsPage';
 import AboutPage from 'pages/profile/about-page/AboutPage';
+import { ProfileBG, UserPicWrapper, UserPic } from './ProfileStyles';
 
 const Profile = () => {
   const { url } = useRouteMatch();

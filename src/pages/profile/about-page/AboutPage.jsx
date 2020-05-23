@@ -1,13 +1,12 @@
 import React from 'react';
-import { Container } from 'components/shared/SharedStyles';
+import { Container, FlexBox } from 'components/shared/SharedStyles';
 import ProfileHead from 'components/profile-head/ProfileHead';
-import { FlexBox } from 'components/shared/SharedStyles';
 
 import {
   TabListComponent,
   TabsComponent,
   TabPanelComponent,
-  TabComponent,
+  TabComponent
 } from './AboutPageStyles';
 
 const AboutPage = () => {
