@@ -6,7 +6,7 @@ const POSITIONS = {
   'space-around': 'space-around',
   'flex-start': 'flex-start',
   'flex-end': 'flex-end',
-  center: 'center',
+  center: 'center'
 };
 
 export const Header = styled.div`
@@ -52,7 +52,7 @@ export const SignUpForm = styled.form`
 `;
 export const FormHeader = styled.div`
   background: ${variables['theme-color']};
-  color: ${variables['white']};
+  color: ${variables.white};
   padding: 20px;
 
   h2 {
@@ -71,12 +71,12 @@ export const Container = styled.div`
     if (bg) {
       return `url(${bg})`;
     }
-    return invert ? variables['theme-color'] : variables['white'];
+    return invert ? variables['theme-color'] : variables.white;
   }};
   background-size: cover;
   background-position: 25%;
   justify-content: ${props => {
-    for (let i in props) {
+    for (const i in props) {
       if (POSITIONS[i]) return i;
     }
   }};

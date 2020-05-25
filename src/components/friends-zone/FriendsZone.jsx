@@ -6,12 +6,13 @@ import { BsHeart } from 'react-icons/bs';
 
 import { UserInfo } from './FriendsZoneStyles';
 
-const FriendsZone = ({ name, mutual }) => {
+const FriendsZone = ({ name, mutual, pd = false }) => {
   return (
     <FlexBox
       justify-content="space-between"
       align-items="center"
       margin-bottom="20px"
+      pd={pd}
     >
       <FlexBox align-items="center">
         <Avatar />

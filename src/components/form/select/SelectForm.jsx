@@ -4,18 +4,18 @@ import variables from 'styles/variables';
 
 const selectStyles = (base, error) => ({
   ...base,
-  border: error ? `1px solid ${variables['error']}` : '1px solid transparent',
+  border: error ? `1px solid ${variables.error}` : '1px solid transparent',
   borderRadius: '0',
   borderBottom: error
-    ? `1px solid ${variables['error']}`
+    ? `1px solid ${variables.error}`
     : `1px solid ${variables['gray-color']}`,
-  boxShadow: 'none',
+  boxShadow: 'none'
 });
 
 const defaultView = {
   color: variables['gray-color'],
   fontFamily: 'Arial',
-  fontSize: '13px',
+  fontSize: '13px'
 };
 
 const SelectForm = ({ options, placeholder, error, ...otherProps }) => (
@@ -23,18 +23,18 @@ const SelectForm = ({ options, placeholder, error, ...otherProps }) => (
     {...otherProps}
     placeholder={placeholder}
     components={{
-      IndicatorSeparator: () => null,
+      IndicatorSeparator: null
     }}
     styles={{
       control: base => selectStyles(base, error),
       placeholder: defaultStyles => ({
         ...defaultStyles,
-        ...defaultView,
+        ...defaultView
       }),
       singleValue: provided => ({
         ...provided,
-        ...defaultView,
-      }),
+        ...defaultView
+      })
     }}
     options={options}
   />

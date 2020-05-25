@@ -5,6 +5,7 @@ import variables from 'styles/variables';
 export const TabsComponent = styled(Tabs)`
   display: flex;
   margin-top: 30px;
+  width: 100%;
   align-items: flex-start;
 `;
 
@@ -39,7 +40,7 @@ export const TabPanelComponent = styled(TabPanel)`
     background: white;
     opacity: 1;
 
-    & > div {
+    & > div:first-child {
       padding: 30px 50px 0px;
     }
 

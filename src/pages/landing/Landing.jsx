@@ -1,7 +1,14 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 import LandingBG from 'assets/landingBG.jpg';
+import Logo from 'components/logo/Logo';
+import Input from 'components/form/Input/Input';
+import CustomBtn from 'components/form/btn/CustomBtn';
+import SelectForm from 'components/form/select/SelectForm';
+
+import { age, gender, country } from 'utils/enums';
 import {
   Header,
   Container,
@@ -11,14 +18,8 @@ import {
   FromWrapper,
   FormHeader,
   SignUpForm,
-  Col2,
+  Col2
 } from './LandingStyles';
-import Logo from 'components/logo/Logo';
-import Input from 'components/form/Input/Input';
-import CustomBtn from 'components/form/btn/CustomBtn';
-import SelectForm from 'components/form/select/SelectForm';
-
-import { age, gender, country } from 'utils/enums';
 
 const Landing = () => {
   const { register, errors, handleSubmit } = useForm();
@@ -26,9 +27,9 @@ const Landing = () => {
     register: register2,
     errors: errors2,
     handleSubmit: handleSubmit2,
-    control: control2,
+    control: control2
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onBlur'
   });
 
   const onSubmit = data => {
@@ -40,7 +41,7 @@ const Landing = () => {
       ...data,
       age: data.age.value,
       gender: data.gender.value,
-      country: data.country.value,
+      country: data.country.value
     };
 
     console.log(dataToSend);
@@ -64,7 +65,7 @@ const Landing = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              maxWidth: '572px',
+              maxWidth: '572px'
             }}
           >
             <Input
@@ -78,8 +79,8 @@ const Landing = () => {
                 required: true,
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: 'Enter a valid email address',
-                },
+                  message: 'Enter a valid email address'
+                }
               }}
               required
               placeholder="Email"
@@ -101,7 +102,7 @@ const Landing = () => {
         </Container>
       </Header>
       <Body>
-        <Container center bg={LandingBG}></Container>
+        <Container center bg={LandingBG} />
         <Container center column>
           <MainText>Create An Account</MainText>
           <FromWrapper>
@@ -118,8 +119,8 @@ const Landing = () => {
                   required: true,
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    message: 'Enter a valid email address',
-                  },
+                    message: 'Enter a valid email address'
+                  }
                 }}
                 register={register2}
               />
@@ -177,6 +178,7 @@ const Landing = () => {
               </Col2>
               <Controller
                 as={
+                  // eslint-disable-next-line react/jsx-wrap-multilines
                   <SelectForm
                     options={country}
                     placeholder="Country"

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Container, FlexBox } from 'components/shared/SharedStyles';
 import ProfileHead from 'components/profile-head/ProfileHead';
@@ -16,18 +17,16 @@ const AboutPage = () => {
       <TabsComponent>
         <FlexBox shadow margin-right="30px" max-width="290px" width="100%" pd>
           <TabListComponent>
-            <TabComponent>Something About Me</TabComponent>
-            <TabComponent>Working Zone</TabComponent>
-            <TabComponent>Educational Qualification</TabComponent>
-            <TabComponent>Work & Education</TabComponent>
-            <TabComponent>Friends & Family</TabComponent>
+            <TabComponent>About me</TabComponent>
+            <TabComponent>Camera</TabComponent>
+            <TabComponent>Interests</TabComponent>
             <TabComponent>Contact Details</TabComponent>
           </TabListComponent>
         </FlexBox>
 
         <TabPanelComponent>
           <div>
-            <h3>Something About Me</h3>
+            <h3>About me</h3>
           </div>
 
           <p>
@@ -46,7 +45,7 @@ const AboutPage = () => {
         </TabPanelComponent>
         <TabPanelComponent>
           <div>
-            <h3>Working Zone</h3>
+            <h3>Camera</h3>
           </div>
           <p>
             Many desktop publishing packages and web page editors now use Lorem
@@ -64,43 +63,7 @@ const AboutPage = () => {
         </TabPanelComponent>
         <TabPanelComponent>
           <div>
-            <h3>Educational Qualification</h3>
-          </div>
-          <p>
-            Many desktop publishing packages and web page editors now use Lorem
-            Ipsum as their default model text, and a search for 'lorem ipsum'
-            will uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search
-          </p>
-        </TabPanelComponent>
-        <TabPanelComponent>
-          <div>
-            <h3>Work & Education</h3>
-          </div>
-          <p>
-            Many desktop publishing packages and web page editors now use Lorem
-            Ipsum as their default model text, and a search for 'lorem ipsum'
-            will uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search
-          </p>
-        </TabPanelComponent>
-        <TabPanelComponent>
-          <div>
-            <h3>Friends & Family</h3>
+            <h3>Interests</h3>
           </div>
           <p>
             Many desktop publishing packages and web page editors now use Lorem

@@ -16,7 +16,6 @@ function App() {
 
   return (
     <Fragment>
-      <GlobalStyle />
       <AppWrapper>
         <Route render={() => pathname !== '/landing' && <Header />} />
         <Switch>
@@ -31,6 +30,7 @@ function App() {
           <ProtectedRoute component={NotFoundPage} />
         </Switch>
       </AppWrapper>
+      <GlobalStyle />
     </Fragment>
   );
 }

@@ -2,13 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { GoSearch } from 'react-icons/go';
 
-import { Container, FlexBox } from 'components/shared/SharedStyles';
+import { Container, FlexBox, Nav } from 'components/shared/SharedStyles';
 import Logo from 'components/logo/Logo';
 import ProfileDropdown from 'components/profile-dropdown/ProfileDropdown';
 import Input from 'components/form/Input/Input';
 
 import { HeaderWrapper, LogoWrapper } from './HeaderStyles';
-import { Nav } from 'components/shared/SharedStyles';
 
 const Header = () => (
   <HeaderWrapper>
