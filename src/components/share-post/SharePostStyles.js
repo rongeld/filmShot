@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import variables from 'styles/variables';
 
 export const Textarea = styled.textarea`
   border: none;
@@ -9,4 +10,16 @@ export const Textarea = styled.textarea`
   width: 100%;
   outline: none;
   resize: none;
+`;
+export const AddWrapper = styled.div`
+  color: ${variables['theme-color']};
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  /* background: ${variables['theme-color']}; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  cursor: pointer;
 `;

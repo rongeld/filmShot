@@ -58,4 +58,4 @@ const ProfileBody = () => (
   </Wrapper>
 );
 
-export default ProfileBody;
+export default React.memo(ProfileBody);

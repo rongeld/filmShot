@@ -19,7 +19,13 @@ const ProfileDropdown = () => {
 
   return (
     <div style={{ marginLeft: '20px' }}>
-      <div onClick={dropdownVisibilityHandler}>
+      <div
+        onClick={dropdownVisibilityHandler}
+        onKeyDown={dropdownVisibilityHandler}
+        role="button"
+        tabIndex={0}
+        style={{ outline: 'none' }}
+      >
         <Avatar />
       </div>
 
@@ -35,4 +41,4 @@ const ProfileDropdown = () => {
   );
 };
 
-export default ProfileDropdown;
+export default React.memo(ProfileDropdown);

@@ -21,7 +21,7 @@ export const Col2 = styled.div`
   display: flex;
 
   & > div:first-child {
-    margin-right: 20px;
+    margin-right: 60px;
   }
 
   & > div {

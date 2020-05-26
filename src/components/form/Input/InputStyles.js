@@ -47,3 +47,17 @@ export const InputForm = styled.input`
     color: ${({ invert }) => colorChangeHandler(invert)};
   }
 `;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+  margin-top: 13px;
+`;
+
+export const DeleteBtn = styled.input`
+  position: absolute !important;
+  width: 30px !important;
+  height: 30px;
+  top: 0;
+  right: 0;
+  background: white !important;
+`;
