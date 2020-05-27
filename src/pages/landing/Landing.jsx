@@ -7,7 +7,10 @@ import Logo from 'components/logo/Logo';
 import Input from 'components/form/Input/Input';
 import CustomBtn from 'components/form/btn/CustomBtn';
 import SelectForm from 'components/form/select/SelectForm';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { selectCurrentUserLoading } from 'redux/user/user-selector';
+import { signUpStart, emailSignInStart } from 'redux/user/user-actions';
 import { age, gender, country } from 'utils/enums';
 import {
   Header,
@@ -23,6 +26,8 @@ import {
 
 const Landing = () => {
   const { register, errors, handleSubmit } = useForm();
+  const isLoading = useSelector(selectCurrentUserLoading);
+  const dispatch = useDispatch();
   const {
     register: register2,
     errors: errors2,
@@ -32,8 +37,8 @@ const Landing = () => {
     mode: 'onBlur'
   });
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = ({ email, password }) => {
+    dispatch(emailSignInStart({ email, password }));
   };
 
   const onSignUp = data => {
@@ -44,7 +49,7 @@ const Landing = () => {
       country: data.country.value
     };
 
-    console.log(dataToSend);
+    dispatch(signUpStart(dataToSend));
   };
 
   return (
@@ -95,7 +100,7 @@ const Landing = () => {
               width="35"
               placeholder="Password"
             />
-            <CustomBtn inverted type="submit">
+            <CustomBtn isLoading={isLoading[1]} inverted type="submit">
               Login
             </CustomBtn>
           </form>
@@ -189,7 +194,7 @@ const Landing = () => {
                 control={control2}
                 rules={{ required: true }}
               />
-              <CustomBtn type="submit" fullwidth>
+              <CustomBtn isLoading={isLoading[0]} type="submit" fullwidth>
                 Create Account
               </CustomBtn>
             </SignUpForm>

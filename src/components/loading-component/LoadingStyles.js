@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import variables from 'styles/variables';
 
 export default styled.div`
   display: flex;
@@ -7,8 +6,9 @@ export default styled.div`
   width: 70px;
   margin: 0 auto;
   padding-top: 200px;
+  color: transparent;
 
   svg {
-    fill: ${variables['theme-color']};
+    fill: transparent;
   }
 `;

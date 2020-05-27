@@ -21,9 +21,16 @@ const Input = ({
   resetFile,
   onChangeHandler,
   imageLink,
+  noBorder,
   ...otherProps
 }) => (
-  <InputWrapper width={width} invert={invert} error={error} flex={flex}>
+  <InputWrapper
+    width={width}
+    invert={invert}
+    noBorder={noBorder}
+    error={error}
+    flex={flex}
+  >
     <Icon>{children}</Icon>
     <InputForm
       ref={register && register(data || { required })}

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 class UserAPI {
   static async signIn(data) {
+    console.log(data);
     const response = await axios({
       method: 'post',
       url: `${process.env.REACT_APP_API}/users/login`,

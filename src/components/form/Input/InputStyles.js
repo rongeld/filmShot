@@ -1,17 +1,17 @@
 import styled, { css } from 'styled-components';
 import variables from '../../../styles/variables';
 
-const borderStyles = css`
-  border-bottom: ${({ invert }) => `1px solid ${colorChangeHandler(invert)}`};
-`;
 const borderStylesInvalid = css`
-  border: 1px solid ${variables['error']};
+  border: 1px solid ${variables.error};
 `;
 
 const colorChangeHandler = invert => {
   return invert ? variables['light-gray'] : variables['gray-color'];
 };
 
+const borderStyles = css`
+  border-bottom: ${({ invert }) => `1px solid ${colorChangeHandler(invert)}`};
+`;
 export const Icon = styled.div`
   position: absolute;
   right: 0;
@@ -27,6 +27,10 @@ export const InputWrapper = styled.div`
   border: 1px solid transparent;
   flex: ${({ flex }) => flex || 'initial'};
   ${({ error }) => (error ? borderStylesInvalid : borderStyles)}
+  ${({ noBorder }) =>
+    noBorder && {
+      border: 'none'
+    }}
 `;
 export const InputForm = styled.input`
   color: ${({ invert }) => colorChangeHandler(invert)};

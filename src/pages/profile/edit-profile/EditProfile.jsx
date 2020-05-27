@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import image from 'assets/profile-1.jpg';
 
 import SelectForm from 'components/form/select/SelectForm';
 import { Container, FlexBox } from 'components/shared/SharedStyles';

@@ -11,7 +11,7 @@ const buttonStyles = css`
 `;
 
 const invertedButtonStyles = css`
-  background-color: ${variables['white']};
+  background-color: ${variables.white};
   color: ${variables['theme-color']};
 `;
 const sharedBtnStyles = css`
@@ -52,6 +52,7 @@ export const CustomButtonContainer = styled.button`
   display: flex;
   justify-content: center;
   transition: all 0.3s ease;
+  position: relative;
   ${getButtonStyles}
   ${stylize}
 

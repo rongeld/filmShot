@@ -5,18 +5,31 @@ import UserActionTypes from './user-types';
 import { signInSuccess, signUpFailure, signInStart } from './user-actions';
 
 export function* signUp({ payload }) {
-  yield put(signInStart());
+  yield put(signInStart(true));
   try {
     const {
       data: { token, user }
     } = yield UserAPI.signUp(payload);
     const userToSafe = {
       token,
-      name: user.name,
-      email: user.email,
-      role: user.role
+      ...user
     };
-    yield put(signInSuccess(userToSafe));
+    yield put(signInSuccess({ userToSafe, signIn: false }));
+  } catch (err) {
+    yield put(signUpFailure(err));
+  }
+}
+export function* signInWithEmail({ payload }) {
+  yield put(signInStart(false));
+  try {
+    const {
+      data: { token, user }
+    } = yield UserAPI.signIn(payload);
+    const userToSafe = {
+      token,
+      ...user
+    };
+    yield put(signInSuccess({ userToSafe, signIn: true }));
   } catch (err) {
     yield put(signUpFailure(err));
   }
@@ -24,7 +37,10 @@ export function* signUp({ payload }) {
 export function* onSignUpStart() {
   yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 }
+export function* onSignInStart() {
+  yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
+}
 
 export function* userSagas() {
-  yield all([call(onSignUpStart)]);
+  yield all([call(onSignUpStart), call(onSignInStart)]);
 }

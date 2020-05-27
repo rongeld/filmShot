@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { NavLink, useRouteMatch, Route, useLocation } from 'react-router-dom';
 
 import profileImage from 'assets/profile-1.jpg';
@@ -11,17 +11,23 @@ import {
 } from 'components/shared/SharedStyles';
 
 import CustomBtn from 'components/form/btn/CustomBtn';
+import Loading from 'components/loading-component/Loading';
 
-import PhotosPage from 'pages/profile/photos-page/PhotosPage';
-import FriendsPage from 'pages/profile/friends-page/FriendsPage';
-import AboutPage from 'pages/profile/about-page/AboutPage';
-import EditProfile from 'pages/profile/edit-profile/EditProfile';
 import {
   ProfileBG,
   UserPicWrapper,
   UserPic,
   EditContainer
 } from './ProfileStyles';
+
+const PhotosPage = lazy(() => import('pages/profile/photos-page/PhotosPage'));
+const FriendsPage = lazy(() =>
+  import('pages/profile/friends-page/FriendsPage')
+);
+const AboutPage = lazy(() => import('pages/profile/about-page/AboutPage'));
+const EditProfile = lazy(() =>
+  import('pages/profile/edit-profile/EditProfile')
+);
 
 const Profile = () => {
   const { url } = useRouteMatch();
@@ -50,11 +56,12 @@ const Profile = () => {
           </EditContainer>
         </Container>
       </FlexBox>
-
-      <Route path={`${url}/photos`} exact component={PhotosPage} />
-      <Route path={`${url}/friends`} exact component={FriendsPage} />
-      <Route path={`${url}/`} exact component={AboutPage} />
-      <Route path={`${url}/edit-profile`} exact component={EditProfile} />
+      <Suspense fallback={<Loading />}>
+        <Route path={`${url}/photos`} exact component={PhotosPage} />
+        <Route path={`${url}/friends`} exact component={FriendsPage} />
+        <Route path={`${url}/`} exact component={AboutPage} />
+        <Route path={`${url}/edit-profile`} exact component={EditProfile} />
+      </Suspense>
     </Wrapper>
   );
 };
