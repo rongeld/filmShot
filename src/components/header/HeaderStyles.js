@@ -11,6 +11,15 @@ export const HeaderWrapper = styled.header`
 `;
 export const LogoWrapper = styled.div`
   margin-left: -45px;
+
+  @media screen and (max-width: 665px) {
+    display: none;
+  }
+`;
+export const SearchWrapper = styled.div`
+  @media screen and (max-width: 665px) {
+    display: none;
+  }
 `;
 export const Nav = styled.nav`
   display: flex;

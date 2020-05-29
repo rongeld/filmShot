@@ -7,7 +7,7 @@ import Logo from 'components/logo/Logo';
 import ProfileDropdown from 'components/profile-dropdown/ProfileDropdown';
 import Input from 'components/form/Input/Input';
 
-import { HeaderWrapper, LogoWrapper } from './HeaderStyles';
+import { HeaderWrapper, LogoWrapper, SearchWrapper } from './HeaderStyles';
 
 const Header = () => (
   <HeaderWrapper>
@@ -24,12 +24,14 @@ const Header = () => (
       <FlexBox
         align-items="center"
         position="relative"
-        width="23.5%"
         justify-content="space-between"
       >
-        <Input type="text" name="search" placeholder="Search" flex="1">
-          <GoSearch />
-        </Input>
+        <SearchWrapper>
+          <Input type="text" name="search" placeholder="Search" flex="1">
+            <GoSearch />
+          </Input>
+        </SearchWrapper>
+
         <ProfileDropdown />
       </FlexBox>
     </Container>

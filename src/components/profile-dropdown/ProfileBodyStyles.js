@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   transition: opacity 0.3s;
   transform: translateY(0);
   top: 70px;
-  width: 100%;
+  width: 274px;
   right: 0;
   background: white;
 

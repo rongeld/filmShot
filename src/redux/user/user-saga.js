@@ -2,10 +2,15 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import UserAPI from 'rest/UserApi';
 import UserActionTypes from './user-types';
-import { signInSuccess, signUpFailure, signInStart } from './user-actions';
+import {
+  signInSuccess,
+  signUpFailure,
+  busyStart,
+  updateMeSuccess
+} from './user-actions';
 
 export function* signUp({ payload }) {
-  yield put(signInStart(true));
+  yield put(busyStart(true));
   try {
     const {
       data: { token, user }
@@ -14,13 +19,13 @@ export function* signUp({ payload }) {
       token,
       ...user
     };
-    yield put(signInSuccess({ userToSafe, signIn: false }));
+    yield put(signInSuccess(userToSafe));
   } catch (err) {
     yield put(signUpFailure(err));
   }
 }
 export function* signInWithEmail({ payload }) {
-  yield put(signInStart(false));
+  yield put(busyStart(false));
   try {
     const {
       data: { token, user }
@@ -29,18 +34,31 @@ export function* signInWithEmail({ payload }) {
       token,
       ...user
     };
-    yield put(signInSuccess({ userToSafe, signIn: true }));
+    yield put(signInSuccess(userToSafe));
   } catch (err) {
     yield put(signUpFailure(err));
   }
 }
+export function* updateMe({ payload }) {
+  yield put(busyStart());
+  try {
+    const { data } = yield UserAPI.updateMe(payload);
+    yield put(updateMeSuccess(data));
+  } catch (err) {
+    yield put(signUpFailure(err));
+  }
+}
+
 export function* onSignUpStart() {
   yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 }
 export function* onSignInStart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
+export function* onUpdateMeStart() {
+  yield takeLatest(UserActionTypes.UPDATE_ME_START, updateMe);
+}
 
 export function* userSagas() {
-  yield all([call(onSignUpStart), call(onSignInStart)]);
+  yield all([call(onSignUpStart), call(onSignInStart), call(onUpdateMeStart)]);
 }

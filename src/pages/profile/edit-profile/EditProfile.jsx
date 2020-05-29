@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-
+import { useSelector, useDispatch } from 'react-redux';
 import SelectForm from 'components/form/select/SelectForm';
 import { Container, FlexBox } from 'components/shared/SharedStyles';
 import CustomBtn from 'components/form/btn/CustomBtn';
@@ -12,15 +12,22 @@ import {
   TabComponent
 } from 'pages/profile/about-page/AboutPageStyles';
 import { age, gender } from 'utils/enums';
-
+import {
+  selectCurrentUser,
+  selectCurrentUserLoading
+} from 'redux/user/user-selector';
+import { updateMeStart } from 'redux/user/user-actions';
 import { FormWrapper, Col2, Form, FormLeft } from './EditProfileStyles';
 
 const EditProfile = () => {
+  const currentUser = useSelector(selectCurrentUser);
+  const isLoading = useSelector(selectCurrentUserLoading);
+  const dispatch = useDispatch();
   const defaultValues = {
-    firstName: 'Madison',
-    lastName: 'Howard',
-    gender: { value: 'man', label: 'Man' },
-    age: { value: 'adult', label: '+18' },
+    firstName: currentUser.firstName,
+    lastName: currentUser.lastName,
+    gender: gender.find(item => item.value === currentUser.gender),
+    age: age.find(item => item.value === currentUser.age),
     photoLink:
       'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg'
   };
@@ -31,7 +38,13 @@ const EditProfile = () => {
   });
 
   const onSubmit = data => {
-    console.log(data);
+    const dataToSend = {
+      ...data,
+      token: currentUser.token,
+      age: data.age.value,
+      gender: data.gender.value
+    };
+    dispatch(updateMeStart(dataToSend));
   };
 
   const onPhotoChangeHandler = e => {
@@ -110,7 +123,9 @@ const EditProfile = () => {
                 justify-content="flex-end"
                 padding-left="50px"
               >
-                <CustomBtn type="submit">Apply</CustomBtn>
+                <CustomBtn type="submit" isLoading={isLoading[1]}>
+                  Apply
+                </CustomBtn>
               </FlexBox>
             </Form>
           </FormWrapper>
@@ -125,7 +140,7 @@ const EditProfile = () => {
                 <Input
                   name="photo"
                   isValid={errors.photo}
-                  register={register}
+                  // register={register}
                   imageLink={defaultValues.photoLink}
                   type="file"
                   onChangeHandler={onPhotoChangeHandler}

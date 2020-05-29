@@ -14,9 +14,19 @@ export const emailSignInStart = emailAndPassword => ({
   type: UserActionTypes.EMAIL_SIGN_IN_START,
   payload: emailAndPassword
 });
-export const signInStart = isSignIn => ({
-  type: UserActionTypes.SIGN_IN_START,
+
+export const busyStart = isSignIn => ({
+  type: UserActionTypes.SET_LOADING,
   payload: isSignIn
+});
+
+export const updateMeStart = data => ({
+  type: UserActionTypes.UPDATE_ME_START,
+  payload: data
+});
+export const updateMeSuccess = data => ({
+  type: UserActionTypes.UPDATE_ME_SUCCESS,
+  payload: data
 });
 
 export const signOutStart = () => ({

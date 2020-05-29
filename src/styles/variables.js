@@ -5,7 +5,7 @@ export default {
   'light-gray': '#f2f2f3',
   'light-white': '#f4f5f7',
   'ash-color': '#d2d2d2',
-  'theme-color': '#dc4734',
+  'theme-color': '#94618E',
   'bdr-color': '#dddddd',
   'bg-dark': '#22282e',
   'bg-color': '#f1f1f1',
@@ -29,5 +29,5 @@ export default {
   pinterest: '#CB2028',
   youtube: '#CC332D',
   'google-plus': '#fe6d4c',
-  instagram: '#c619b8',
+  instagram: '#c619b8'
 };

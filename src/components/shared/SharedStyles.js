@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: ${({ jc }) => jc || 'flex-start'};
   flex-direction: ${({ column }) => (column ? 'column' : 'row')};
+  height: 100%;
 `;
 
 export const FlexBox = styled.div`
@@ -24,10 +25,6 @@ export const Wrapper = styled.main`
   background: ${variables['bg-color']};
   padding: 100px 0;
   min-height: 100vh;
-
-  & > div > *:not(:last-child) {
-    margin-right: 30px;
-  }
 `;
 
 export const Nav = styled.nav`
@@ -47,8 +44,16 @@ export const Nav = styled.nav`
     text-decoration: none;
     transition: all 0.3s ease-in-out;
 
+    @media (max-width: 665px) {
+      font-size: 12px;
+    }
+
     &:not(:last-child) {
       margin-right: ${({ small }) => (small ? '30px' : '50px')};
+
+      @media (max-width: 665px) {
+        margin-right: 30px;
+      }
     }
 
     &.active,

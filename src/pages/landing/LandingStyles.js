@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import variables from 'styles/variables';
 
 const POSITIONS = {
@@ -17,6 +17,7 @@ export const MainText = styled.h1`
   color: ${variables['theme-color']};
   font-weight: bolder;
   margin-bottom: 70px;
+  margin-top: 10vh;
 `;
 export const Body = styled.div`
   display: flex;
@@ -26,6 +27,10 @@ export const FromWrapper = styled.div`
   max-width: 572px;
   box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.25);
   width: 80%;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 export const LandingWrapper = styled.div`
   display: flex;
@@ -46,6 +51,14 @@ export const Col2 = styled.div`
 export const SignUpForm = styled.form`
   padding: 42px 100px 50px;
 
+  @media (max-width: 1100px) {
+    padding: 10px 20px 30px;
+  }
+
+  @media (max-width: 800px) {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
   & > div {
     margin-bottom: 20px;
   }
@@ -58,6 +71,17 @@ export const FormHeader = styled.div`
   h2 {
     text-align: center;
     margin: 0;
+  }
+`;
+
+const hideOnSmallScrn = css`
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;
+const bgOnSmallScreenStyles = css`
+  @media (max-width: 800px) {
+    background: ${({ bgOnSmallScreen }) => `url(${bgOnSmallScreen})`};
   }
 `;
 
@@ -80,4 +104,7 @@ export const Container = styled.div`
       if (POSITIONS[i]) return i;
     }
   }};
+
+  ${({ hideOnSmallScreen }) => hideOnSmallScreen && hideOnSmallScrn}
+  ${({ bgOnSmallScreen }) => bgOnSmallScreen && bgOnSmallScreenStyles}
 `;

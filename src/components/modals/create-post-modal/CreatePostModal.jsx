@@ -8,12 +8,17 @@ import { closeModal } from 'redux/modal/modal-actions';
 import { Title } from 'components/info-block/InfoBlockStyles';
 import BGOverlay from 'components/modals/bg-overlay/BGOverlayStyles';
 import modalSelector from 'redux/modal/modal-selector';
+import { selectCurrentUser } from 'redux/user/user-selector';
 import CustomBtn from 'components/form/btn/CustomBtn';
 import { FlexBox } from 'components/shared/SharedStyles';
+import { createPostStart } from 'redux/post/post-actions';
+import { selectPostLoading } from 'redux/post/post-selector';
 import { Wrapper, ButtonWrapper, Description } from './CreatePostModalStyles';
 
 const CreatePostModal = () => {
   const isActive = useSelector(modalSelector);
+  const isLoading = useSelector(selectPostLoading);
+  const { _id: author } = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [file, setFile] = useState();
 
@@ -33,7 +38,9 @@ const CreatePostModal = () => {
   };
 
   const onSubmit = data => {
-    console.log(data);
+    data.author = author;
+    data.photo = data.photo[0];
+    dispatch(createPostStart(data));
   };
 
   const content = (
@@ -74,7 +81,9 @@ const CreatePostModal = () => {
           </ButtonWrapper>
 
           <FlexBox justify-content="flex-end">
-            <CustomBtn type="submit">Post</CustomBtn>
+            <CustomBtn type="submit" isLoading={isLoading}>
+              Post
+            </CustomBtn>
           </FlexBox>
         </Wrapper>
       </CSSTransition>

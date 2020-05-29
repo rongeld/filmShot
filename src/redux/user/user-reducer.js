@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 
 const userReducer = produce((draft = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UserActionTypes.SIGN_IN_START:
+    case UserActionTypes.SET_LOADING:
       if (action.payload) {
         draft.isLoading[0] = true;
       } else {
@@ -18,11 +18,17 @@ const userReducer = produce((draft = INITIAL_STATE, action) => {
       return draft;
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
-        currentUser: action.payload.userToSafe,
+        currentUser: action.payload,
         error: null,
         isLoading: [false, false]
       };
-
+    case UserActionTypes.UPDATE_ME_SUCCESS:
+      draft.currentUser = {
+        token: draft.currentUser.token,
+        ...action.payload.data
+      };
+      draft.isLoading = [false, false];
+      return draft;
     case UserActionTypes.SIGN_OUT:
       return {
         currentUser: null,

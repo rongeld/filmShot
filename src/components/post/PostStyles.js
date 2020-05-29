@@ -24,7 +24,7 @@ export const Header = styled.div`
 `;
 
 export const PostText = styled.div`
-  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 export const Footer = styled.div`
   display: flex;

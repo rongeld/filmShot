@@ -6,8 +6,6 @@ import { selectCurrentUser } from 'redux/user/user-selector';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   const isUser = useSelector(selectCurrentUser);
-
-  console.log(isUser);
   return (
     <Route
       {...rest}

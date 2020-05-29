@@ -1,31 +1,31 @@
 import React from 'react';
 
-import { Aside, Feed } from './DashboardStyles';
-import { Wrapper } from 'components/shared/SharedStyles';
-import { Container } from 'components/shared/SharedStyles';
+import { Wrapper, Container } from 'components/shared/SharedStyles';
+
 import UserInfo from 'components/user-info-aside/UserInfo';
 import SharePost from 'components/share-post/SharePost';
 import Posts from 'components/posts/Posts';
 import InfoBlock from 'components/info-block/InfoBlock';
 import FriendsZone from 'components/friends-zone/FriendsZone';
+import { Aside, Feed } from './DashboardStyles';
 
 const DATA = [
   {
     name: 'Allan Wats',
-    mutual: 10,
+    mutual: 10
   },
   {
     name: 'Eldar Broadwej',
-    mutual: 1,
+    mutual: 1
   },
   {
     name: 'Nill Tayson',
-    mutual: 12,
+    mutual: 12
   },
   {
     name: 'Bill Gates',
-    mutual: 2,
-  },
+    mutual: 2
+  }
 ];
 
 const WrappedInfo = InfoBlock(FriendsZone);

@@ -17,7 +17,6 @@ import {
   Container,
   Body,
   LandingWrapper,
-  MainText,
   FromWrapper,
   FormHeader,
   SignUpForm,
@@ -55,7 +54,7 @@ const Landing = () => {
   return (
     <LandingWrapper>
       <Header>
-        <Container flex-start>
+        <Container flex-start hideOnSmallScreen>
           <Logo />
           <p style={{ marginLeft: '20px', fontWeight: '500' }}>
             Connect and share with other people
@@ -107,9 +106,9 @@ const Landing = () => {
         </Container>
       </Header>
       <Body>
-        <Container center bg={LandingBG} />
-        <Container center column>
-          <MainText>Create An Account</MainText>
+        <Container center bg={LandingBG} hideOnSmallScreen />
+        <Container center column bgOnSmallScreen={LandingBG}>
+          {/* <MainText>Create An Account</MainText> */}
           <FromWrapper>
             <FormHeader>
               <h2>Welcome to FilmShot</h2>
