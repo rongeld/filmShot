@@ -17,7 +17,13 @@ import {
   selectCurrentUserLoading
 } from 'redux/user/user-selector';
 import { updateMeStart } from 'redux/user/user-actions';
-import { FormWrapper, Col2, Form, FormLeft } from './EditProfileStyles';
+import {
+  FormWrapper,
+  Col2,
+  Form,
+  FormLeft,
+  TextArea
+} from './EditProfileStyles';
 
 const EditProfile = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -29,7 +35,10 @@ const EditProfile = () => {
     gender: gender.find(item => item.value === currentUser.gender),
     age: age.find(item => item.value === currentUser.age),
     photoLink: `${process.env.REACT_APP_FILES_API}/${currentUser.photo}`,
-    coverLink: `${process.env.REACT_APP_FILES_API}/${currentUser.profileCover}`
+    coverLink: `${process.env.REACT_APP_FILES_API}/${currentUser.profileCover}`,
+    camera: currentUser.camera || '',
+    interests: currentUser.interests || '',
+    about: currentUser.about || ''
   };
   const [file, setFile] = useState();
   const [fileCover, setFileCover] = useState();
@@ -128,6 +137,33 @@ const EditProfile = () => {
                     control={control}
                   />
                 </Col2>
+                <Input
+                  type="text"
+                  placeholder="Camera"
+                  name="camera"
+                  error={errors.camera}
+                  register={register}
+                  data={{ minLength: 2 }}
+                />
+                <TextArea
+                  name="about"
+                  id=""
+                  error={errors.about}
+                  cols="30"
+                  rows="5"
+                  ref={register}
+                  placeholder="About me"
+                />
+
+                <TextArea
+                  name="interests"
+                  id=""
+                  error={errors.interests}
+                  cols="30"
+                  ref={register}
+                  rows="5"
+                  placeholder="Interests"
+                />
               </FormLeft>
               <FlexBox
                 align-items="flex-start"

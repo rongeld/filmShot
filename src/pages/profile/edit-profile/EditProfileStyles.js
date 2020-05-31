@@ -1,7 +1,21 @@
 import styled from 'styled-components';
+import variables from 'styles/variables';
 
 export const FormWrapper = styled.div`
   padding: 10px 50px;
+`;
+export const TextArea = styled.textarea`
+  width: 100%;
+  padding: 20px;
+  outline: none;
+  color: ${variables['gray-color']};
+  border-color: ${variables['gray-color']};
+  margin-bottom: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 `;
 export const Form = styled.form`
   margin-bottom: 50px;

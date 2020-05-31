@@ -10,7 +10,7 @@ import {
   TabComponent
 } from './AboutPageStyles';
 
-const AboutPage = () => {
+const AboutPage = ({ about, camera, interests }) => {
   return (
     <Container column>
       <ProfileHead title="About" navs={['Facebook', 'Twitter', 'Pinterest']} />
@@ -20,7 +20,7 @@ const AboutPage = () => {
             <TabComponent>About me</TabComponent>
             <TabComponent>Camera</TabComponent>
             <TabComponent>Interests</TabComponent>
-            <TabComponent>Contact Details</TabComponent>
+            {/* <TabComponent>Contact Details</TabComponent> */}
           </TabListComponent>
         </FlexBox>
 
@@ -29,57 +29,21 @@ const AboutPage = () => {
             <h3>About me</h3>
           </div>
 
-          <p>
-            Many desktop publishing packages and web page editors now use Lorem
-            Ipsum as their default model text, and a search for 'lorem ipsum'
-            will uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search
-          </p>
+          <p>{about}</p>
         </TabPanelComponent>
         <TabPanelComponent>
           <div>
             <h3>Camera</h3>
           </div>
-          <p>
-            Many desktop publishing packages and web page editors now use Lorem
-            Ipsum as their default model text, and a search for 'lorem ipsum'
-            will uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search
-          </p>
+          <p>{camera}</p>
         </TabPanelComponent>
         <TabPanelComponent>
           <div>
             <h3>Interests</h3>
           </div>
-          <p>
-            Many desktop publishing packages and web page editors now use Lorem
-            Ipsum as their default model text, and a search for 'lorem ipsum'
-            will uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search for 'lorem ipsum' will
-            uncover many web sites still in their infancy. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as
-            their default model text, and a search
-          </p>
+          <p>{interests}</p>
         </TabPanelComponent>
-        <TabPanelComponent>
+        {/* <TabPanelComponent>
           <div>
             <h3>Contact Details</h3>
           </div>
@@ -96,7 +60,7 @@ const AboutPage = () => {
             publishing packages and web page editors now use Lorem Ipsum as
             their default model text, and a search
           </p>
-        </TabPanelComponent>
+        </TabPanelComponent> */}
       </TabsComponent>
     </Container>
   );

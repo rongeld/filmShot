@@ -57,7 +57,11 @@ const CreatePostModal = () => {
           <Title>Create post</Title>
           <Description>
             <textarea
-              style={{ resize: 'none', marginBottom: '20px' }}
+              style={{
+                resize: 'none',
+                marginBottom: '20px',
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI'"
+              }}
               id=""
               rows="5"
               ref={register}

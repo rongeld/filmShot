@@ -111,7 +111,11 @@ const Profile = () => {
           component={() => <PhotosPage posts={user.posts} />}
         />
         <Route path={`${url}/friends`} exact component={FriendsPage} />
-        <Route path={`${url}/`} exact component={AboutPage} />
+        <Route
+          path={`${url}/`}
+          exact
+          component={() => <AboutPage {...user} />}
+        />
         <Route path={`${url}/edit-profile`} exact component={EditProfile} />
       </Suspense>
     </Wrapper>

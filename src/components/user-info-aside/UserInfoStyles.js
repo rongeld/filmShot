@@ -20,3 +20,16 @@ export const Quote = styled.div`
   text-align: center;
   padding: 10px 30px 30px;
 `;
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  h5 {
+    margin: 5px 0;
+    text-align: left;
+  }
+
+  span {
+    text-align: right;
+  }
+`;
