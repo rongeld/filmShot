@@ -10,8 +10,10 @@ const UserInfo = () => {
   const currentUser = useSelector(selectCurrentUser);
   return (
     <FlexBox flex-direction="column" background="white" shadow>
-      <Header>
-        <Avatar />
+      <Header
+        bg={`${process.env.REACT_APP_FILES_API}/${currentUser.profileCover}`}
+      >
+        <Avatar image={currentUser.photo} />
       </Header>
       <Quote>
         <h3>{`${currentUser?.firstName} ${currentUser?.lastName}`}</h3>

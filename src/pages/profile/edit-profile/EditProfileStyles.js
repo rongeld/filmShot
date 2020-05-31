@@ -15,6 +15,10 @@ export const FormLeft = styled.div`
   flex: 3;
   border-right: 1px solid lightgrey;
   padding-right: 50px;
+
+  h4 {
+    margin-bottom: 4px;
+  }
 `;
 
 export const Col2 = styled.div`

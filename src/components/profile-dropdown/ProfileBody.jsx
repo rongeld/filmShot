@@ -11,7 +11,6 @@ import { Wrapper, Box, BoxBody, List } from './ProfileBodyStyles';
 const ProfileBody = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-
   const signOutHandler = useCallback(() => dispatch(signOut()), [dispatch]);
 
   return (
@@ -31,7 +30,7 @@ const ProfileBody = () => {
                 Profile
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/">
                 <AiOutlineMail />
                 Inbox
@@ -42,7 +41,7 @@ const ProfileBody = () => {
                 <FiActivity />
                 Activity
               </Link>
-            </li>
+            </li> */}
           </List>
         </BoxBody>
       </Box>
@@ -50,7 +49,7 @@ const ProfileBody = () => {
         <BoxBody>
           <List>
             <li>
-              <Link to="/profile/edit-profile">
+              <Link to={`/profile/${currentUser.id}/edit-profile`}>
                 <FiSettings />
                 Settings
               </Link>

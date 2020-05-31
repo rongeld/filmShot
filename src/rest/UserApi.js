@@ -1,33 +1,27 @@
-import axios from 'axios';
+import Api from 'rest/Api';
 
 class UserAPI {
   static async signIn(data) {
-    const response = await axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_API}/users/login`,
-      data
-    });
+    const response = await Api.post('/users/login', data, true);
     return response;
   }
 
   static async signUp(data) {
-    const response = await axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_API}/users/signup`,
-      data
-    });
+    const response = await Api.post('/users/signup', data, true);
     return response;
   }
 
   static async updateMe(data) {
-    const response = await axios({
-      method: 'patch',
-      url: `${process.env.REACT_APP_API}/users/updateMe`,
-      data,
-      headers: {
-        Authorization: `Bearer ${data.token}`
-      }
-    });
+    const formData = new FormData();
+    for (const i in data) {
+      formData.append(i, data[i]);
+    }
+    const response = await Api.patch('/users/updateMe', formData, false, true);
+    return response;
+  }
+
+  static async getSingleUser(id) {
+    const response = await Api.get(`/users/${id}`);
     return response;
   }
 }

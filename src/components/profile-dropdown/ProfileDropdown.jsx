@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { useLocation } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from 'redux/user/user-selector';
 import Avatar from 'components/avatar/Avatar';
 import ProfileBody from './ProfileBody';
 
 const ProfileDropdown = () => {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const location = useLocation();
-
+  const currentUser = useSelector(selectCurrentUser);
   useEffect(() => {
     setDropdownVisibility(false);
   }, [location]);
@@ -26,17 +27,19 @@ const ProfileDropdown = () => {
         tabIndex={0}
         style={{ outline: 'none' }}
       >
-        <Avatar />
+        <Avatar image={currentUser?.photo} />
       </div>
 
-      <CSSTransition
-        in={dropdownVisibility}
-        classNames="fade"
-        timeout={300}
-        unmountOnExit
-      >
-        {() => <ProfileBody />}
-      </CSSTransition>
+      {currentUser && (
+        <CSSTransition
+          in={dropdownVisibility}
+          classNames="fade"
+          timeout={300}
+          unmountOnExit
+        >
+          {() => <ProfileBody />}
+        </CSSTransition>
+      )}
     </div>
   );
 };

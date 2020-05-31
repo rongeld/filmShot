@@ -28,32 +28,43 @@ const EditProfile = () => {
     lastName: currentUser.lastName,
     gender: gender.find(item => item.value === currentUser.gender),
     age: age.find(item => item.value === currentUser.age),
-    photoLink:
-      'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg'
+    photoLink: `${process.env.REACT_APP_FILES_API}/${currentUser.photo}`,
+    coverLink: `${process.env.REACT_APP_FILES_API}/${currentUser.profileCover}`
   };
   const [file, setFile] = useState();
+  const [fileCover, setFileCover] = useState();
 
   const { register, errors, handleSubmit, control, reset } = useForm({
     defaultValues
   });
 
   const onSubmit = data => {
-    const dataToSend = {
-      ...data,
-      token: currentUser.token,
-      age: data.age.value,
-      gender: data.gender.value
-    };
-    dispatch(updateMeStart(dataToSend));
+    if ('photo' in data) {
+      Object.keys(data).forEach(item => {
+        if (!data[item].length) {
+          delete data[item];
+        } else {
+          data[item] = data[item][0];
+        }
+      });
+    } else {
+      data.age = data.age.value;
+      data.gender = data.gender.value;
+    }
+    dispatch(updateMeStart(data));
   };
 
   const onPhotoChangeHandler = e => {
-    setFile(URL.createObjectURL(e.target.files[0]));
+    if (e.target.name === 'photo')
+      setFile(URL?.createObjectURL(e.target.files[0]));
+    if (e.target.name === 'profileCover')
+      setFileCover(URL?.createObjectURL(e.target.files[0]));
   };
 
   const resetIndividualField = field => {
     reset(defaultValues);
     if (field === 'photo') setFile('');
+    if (field === 'profileCover') setFileCover('');
   };
   return (
     <Container>
@@ -137,10 +148,11 @@ const EditProfile = () => {
           <FormWrapper>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <FormLeft>
+                <h4>Profile image</h4>
                 <Input
                   name="photo"
                   isValid={errors.photo}
-                  // register={register}
+                  register={register}
                   imageLink={defaultValues.photoLink}
                   type="file"
                   onChangeHandler={onPhotoChangeHandler}
@@ -149,6 +161,20 @@ const EditProfile = () => {
                     resetIndividualField('photo');
                   }}
                   file={file}
+                />
+                <h4>Cover image</h4>
+                <Input
+                  name="profileCover"
+                  isValid={errors.profileCover}
+                  register={register}
+                  imageLink={defaultValues.coverLink}
+                  type="file"
+                  onChangeHandler={onPhotoChangeHandler}
+                  element="input"
+                  resetFile={() => {
+                    resetIndividualField('profileCover');
+                  }}
+                  file={fileCover}
                 />
               </FormLeft>
               <FlexBox

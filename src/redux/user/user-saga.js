@@ -6,15 +6,16 @@ import {
   signInSuccess,
   signUpFailure,
   busyStart,
-  updateMeSuccess
+  updateMeSuccess,
+  getSingleUserSuccess,
+  getSingleUserFailure,
+  updateMeFailure
 } from './user-actions';
 
 export function* signUp({ payload }) {
   yield put(busyStart(true));
   try {
-    const {
-      data: { token, user }
-    } = yield UserAPI.signUp(payload);
+    const { token, user } = yield UserAPI.signUp(payload);
     const userToSafe = {
       token,
       ...user
@@ -27,9 +28,7 @@ export function* signUp({ payload }) {
 export function* signInWithEmail({ payload }) {
   yield put(busyStart(false));
   try {
-    const {
-      data: { token, user }
-    } = yield UserAPI.signIn(payload);
+    const { token, user } = yield UserAPI.signIn(payload);
     const userToSafe = {
       token,
       ...user
@@ -42,10 +41,18 @@ export function* signInWithEmail({ payload }) {
 export function* updateMe({ payload }) {
   yield put(busyStart());
   try {
-    const { data } = yield UserAPI.updateMe(payload);
+    const data = yield UserAPI.updateMe(payload);
     yield put(updateMeSuccess(data));
   } catch (err) {
-    yield put(signUpFailure(err));
+    yield put(updateMeFailure(err));
+  }
+}
+export function* getSingleUser({ payload }) {
+  try {
+    const { data } = yield UserAPI.getSingleUser(payload);
+    yield put(getSingleUserSuccess(data));
+  } catch (err) {
+    yield put(getSingleUserFailure(err));
   }
 }
 
@@ -58,7 +65,15 @@ export function* onSignInStart() {
 export function* onUpdateMeStart() {
   yield takeLatest(UserActionTypes.UPDATE_ME_START, updateMe);
 }
+export function* onGetSingleUser() {
+  yield takeLatest(UserActionTypes.GET_SINGLE_USER_START, getSingleUser);
+}
 
 export function* userSagas() {
-  yield all([call(onSignUpStart), call(onSignInStart), call(onUpdateMeStart)]);
+  yield all([
+    call(onSignUpStart),
+    call(onSignInStart),
+    call(onUpdateMeStart),
+    call(onGetSingleUser)
+  ]);
 }

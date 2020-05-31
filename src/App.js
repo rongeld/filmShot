@@ -35,7 +35,11 @@ function App() {
               component={() => <Redirect to="/dashboard" />}
             />
             <ProtectedRoute path="/dashboard" exact component={Dashboard} />
-            <ProtectedRoute path="/profile" component={Profile} />
+            <ProtectedRoute path="/profile/:id" component={Profile} />
+            {isUser && (
+              <Redirect from="/profile/" to={`/profile/${isUser._id}`} />
+            )}
+
             <ProtectedRoute component={NotFoundPage} />
           </Switch>
         </Suspense>

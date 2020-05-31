@@ -28,6 +28,10 @@ export const updateMeSuccess = data => ({
   type: UserActionTypes.UPDATE_ME_SUCCESS,
   payload: data
 });
+export const updateMeFailure = err => ({
+  type: UserActionTypes.UPDATE_ME_FAILURE,
+  payload: err
+});
 
 export const signOutStart = () => ({
   type: UserActionTypes.SIGN_OUT_START
@@ -54,5 +58,22 @@ export const signUpSuccess = ({ user, additionalData }) => ({
 
 export const signUpFailure = err => ({
   type: UserActionTypes.SIGN_UP_FAILURE,
+  payload: err
+});
+
+// get single user
+export const getSingleUserStart = id => ({
+  type: UserActionTypes.GET_SINGLE_USER_START,
+  payload: id
+});
+export const removeSingleUser = () => ({
+  type: UserActionTypes.REMOVE_SINGLE_USER
+});
+export const getSingleUserSuccess = user => ({
+  type: UserActionTypes.GET_SINGLE_USER_SUCCESS,
+  payload: user
+});
+export const getSingleUserFailure = err => ({
+  type: UserActionTypes.GET_SINGLE_USER_FAILURE,
   payload: err
 });

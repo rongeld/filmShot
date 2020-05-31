@@ -24,12 +24,11 @@ const postReducer = produce((draft = INITIAL_STATE, action) => {
       draft.error = null;
       draft.isLoading = false;
       return draft;
-    case PostActionTypes.FETCH_POSTS_FAILURE:
-      draft.error = action.payload;
-      draft.isLoading = false;
-      return draft;
     case PostActionTypes.CREATE_POST_FAILURE:
+    case PostActionTypes.DELETE_POST_FAILURE:
+    case PostActionTypes.FETCH_POSTS_FAILURE:
       draft.isLoading = false;
+      draft.isFetching = false;
       draft.error = action.payload;
       return draft;
     default:

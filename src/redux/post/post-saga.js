@@ -9,7 +9,9 @@ import {
   busyStart,
   fetchPostsSuccess,
   fetchPostsFailure,
-  fetchPostsStart
+  fetchPostsStart,
+  deletePostSuccess,
+  deletePostError
 } from './post-actions';
 
 export function* createPost({ payload }) {
@@ -26,12 +28,19 @@ export function* createPost({ payload }) {
 }
 export function* getAllPosts() {
   try {
-    const {
-      data: { data }
-    } = yield PostAPI.get();
+    const { data } = yield PostAPI.get();
     yield put(fetchPostsSuccess(data));
   } catch (err) {
     yield put(fetchPostsFailure(err));
+  }
+}
+export function* deletePost({ payload }) {
+  try {
+    yield PostAPI.delete(payload);
+    yield put(deletePostSuccess());
+    yield put(fetchPostsStart());
+  } catch (err) {
+    yield put(deletePostError(err));
   }
 }
 
@@ -41,7 +50,10 @@ export function* onCreatePostStart() {
 export function* onGetAllPosts() {
   yield takeLatest(PostActionTypes.FETCH_POSTS_START, getAllPosts);
 }
+export function* onDeletePost() {
+  yield takeLatest(PostActionTypes.DELETE_POST_START, deletePost);
+}
 
 export function* postSagas() {
-  yield all([call(onCreatePostStart), call(onGetAllPosts)]);
+  yield all([call(onCreatePostStart), call(onGetAllPosts), call(onDeletePost)]);
 }

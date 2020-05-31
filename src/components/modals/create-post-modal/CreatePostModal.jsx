@@ -37,10 +37,11 @@ const CreatePostModal = () => {
     if (field === 'photo') setFile('');
   };
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     data.author = author;
     data.photo = data.photo[0];
-    dispatch(createPostStart(data));
+    await dispatch(createPostStart(data));
+    setFile(null);
   };
 
   const content = (

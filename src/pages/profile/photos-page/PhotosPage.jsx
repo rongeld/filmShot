@@ -1,22 +1,31 @@
 import React from 'react';
+
 import { Container } from 'components/shared/SharedStyles';
 import ProfileHead from 'components/profile-head/ProfileHead';
 
-import imageHolder from 'assets/photo-1.jpg';
-
 import { ImagesGrid } from './PhotosPageStyles';
 
-const DATA = new Array(22).fill(imageHolder);
-
-const PhotosPage = () => {
+const PhotosPage = ({ posts }) => {
   return (
     <Container column>
-      <ProfileHead title="Photos" amount={23} navs={['All', 'Most Popular']} />
-      <ImagesGrid>
-        {DATA.map((item, idx) => (
-          <img key={idx} src={item} alt="test" />
-        ))}
-      </ImagesGrid>
+      <ProfileHead
+        title="Photos"
+        amount={posts.length}
+        navs={['All', 'Most Popular']}
+      />
+      {posts.length ? (
+        <ImagesGrid>
+          {posts.map((item, idx) => (
+            <img
+              key={idx}
+              src={`${process.env.REACT_APP_FILES_API}/${item.photo}`}
+              alt="test"
+            />
+          ))}
+        </ImagesGrid>
+      ) : (
+        <h3>No photos yet</h3>
+      )}
     </Container>
   );
 };

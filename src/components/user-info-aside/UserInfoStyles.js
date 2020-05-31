@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const Header = styled.div`
   position: relative;
   border: 10px solid rgba(198, 165, 107, 0.3);
-  background: #bcbcbc;
+  background: ${({ bg }) => (bg ? `url(${bg})` : 'lightgrey')};
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 130px;
 
   & > div {
