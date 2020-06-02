@@ -5,7 +5,7 @@ export default styled.div`
   justify-content: center;
   width: 70px;
   margin: 0 auto;
-  padding-top: 200px;
+  padding-top: ${({ noPadding }) => (noPadding ? '0' : '200px')};
   color: transparent;
 
   svg {

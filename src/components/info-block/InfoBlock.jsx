@@ -8,9 +8,11 @@ const InfoBlock = WrappedComponent => ({ title, data }) => {
     <FlexBox flex-direction="column" shadow pd>
       <Title>{title}</Title>
       <div>
-        {data.map((item, idx) => (
-          <WrappedComponent key={idx} {...item} />
-        ))}
+        {data
+          .filter((item, index) => index < 4)
+          .map((item, idx) => (
+            <WrappedComponent key={idx} {...item} />
+          ))}
       </div>
     </FlexBox>
   );

@@ -14,8 +14,8 @@ const Header = () => (
     <Container jc="space-between">
       <Nav>
         <NavLink to="/dashboard">Home</NavLink>
-        <NavLink to="/messages">Message</NavLink>
-        <NavLink to="/notifications">Notifications</NavLink>
+        <NavLink to="/messages">Messages</NavLink>
+        {/* <NavLink to="/notifications">Notifications</NavLink> */}
       </Nav>
       <LogoWrapper>
         <Logo />

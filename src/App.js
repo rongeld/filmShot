@@ -12,6 +12,7 @@ const Landing = lazy(() => import('pages/landing/Landing'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
 const Profile = lazy(() => import('pages/profile/Profile'));
 const NotFoundPage = lazy(() => import('pages/not-found/NotFoundPage'));
+const Messages = lazy(() => import('pages/messages/Messages'));
 
 function App() {
   const { pathname } = useLocation();
@@ -36,6 +37,7 @@ function App() {
             />
             <ProtectedRoute path="/dashboard" exact component={Dashboard} />
             <ProtectedRoute path="/profile/:id" component={Profile} />
+            <ProtectedRoute path="/messages/:id?" component={Messages} />
             {isUser && (
               <Redirect from="/profile/" to={`/profile/${isUser._id}`} />
             )}

@@ -15,7 +15,6 @@ const UserInfo = () => {
     if (posts) {
       amount = posts.reduce((num, post) => {
         if (post.author.id === currentUser.id) {
-          console.log('object');
           return num + 1;
         }
         return num;
@@ -36,8 +35,6 @@ const UserInfo = () => {
           style={{ marginTop: '30px' }}
         >{`${currentUser?.firstName} ${currentUser?.lastName}`}</h3>
         <Grid>
-          <h5>Friends</h5>
-          <span>0</span>
           <h5>Posts</h5>
           <span>{postsCount}</span>
         </Grid>

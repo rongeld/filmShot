@@ -24,6 +24,11 @@ class UserAPI {
     const response = await Api.get(`/users/${id}`);
     return response;
   }
+
+  static async getAllUsers() {
+    const response = await Api.get('/users');
+    return response;
+  }
 }
 
 export default UserAPI;

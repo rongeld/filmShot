@@ -3,9 +3,9 @@ import { ReactComponent as Preloader } from 'assets/preloader.svg';
 
 import Wrapper from './LoadingStyles';
 
-const Loading = () => {
+const Loading = ({ noPadding }) => {
   return (
-    <Wrapper>
+    <Wrapper noPadding={noPadding}>
       <Preloader />
     </Wrapper>
   );

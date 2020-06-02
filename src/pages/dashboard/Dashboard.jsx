@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { Wrapper, Container } from 'components/shared/SharedStyles';
 
@@ -7,30 +7,27 @@ import SharePost from 'components/share-post/SharePost';
 import Posts from 'components/posts/Posts';
 import InfoBlock from 'components/info-block/InfoBlock';
 import FriendsZone from 'components/friends-zone/FriendsZone';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUsersData, selectUsersStatus } from 'redux/users/users-selector';
+import { fetchUsersStart } from 'redux/users/users-actions';
 import { Aside, Feed } from './DashboardStyles';
-
-const DATA = [
-  {
-    name: 'Allan Wats',
-    mutual: 10
-  },
-  {
-    name: 'Eldar Broadwej',
-    mutual: 1
-  },
-  {
-    name: 'Nill Tayson',
-    mutual: 12
-  },
-  {
-    name: 'Bill Gates',
-    mutual: 2
-  }
-];
 
 const WrappedInfo = InfoBlock(FriendsZone);
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const users = useSelector(selectUsersData);
+  const isFetching = useSelector(selectUsersStatus);
+
+  const fetchAllUsers = useCallback(() => dispatch(fetchUsersStart()), [
+    dispatch
+  ]);
+  useEffect(() => {
+    if (!users.length) {
+      fetchAllUsers();
+    }
+  }, [fetchAllUsers]);
+
   return (
     <Wrapper>
       <Container>
@@ -42,8 +39,11 @@ const Dashboard = () => {
           <Posts />
         </Feed>
         <Aside>
-          <WrappedInfo title="Friends Zone" data={DATA} />
-          <WrappedInfo title="Recent Notifications" data={DATA} />
+          <WrappedInfo
+            isFetching={isFetching}
+            title="New members"
+            data={users}
+          />
         </Aside>
       </Container>
     </Wrapper>

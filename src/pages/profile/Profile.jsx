@@ -5,7 +5,7 @@ import {
   Route,
   useLocation,
   useParams,
-  Redirect
+  Link
 } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 import profileBanner from 'assets/profile-banner.jpg';
@@ -15,6 +15,7 @@ import {
   Container,
   Wrapper
 } from 'components/shared/SharedStyles';
+import { IoIosSend } from 'react-icons/io';
 
 import CustomBtn from 'components/form/btn/CustomBtn';
 import Loading from 'components/loading-component/Loading';
@@ -85,7 +86,7 @@ const Profile = () => {
               About
             </NavLink>
             <NavLink to={`${url}/photos`}>Photos</NavLink>
-            <NavLink to={`${url}/friends`}>Friends</NavLink>
+            {/* <NavLink to={`${url}/friends`}>Friends</NavLink> */}
           </Nav>
           {currentUser?.id === id ? (
             <EditContainer>
@@ -98,7 +99,18 @@ const Profile = () => {
               {!user ? (
                 <PulseLoader size="5" color={'lightgrey'} />
               ) : (
-                user.firstName + ' ' + user.lastName
+                <FlexBox align-items="center">
+                  <div style={{ marginRight: '10px' }}>
+                    {user.firstName + ' ' + user.lastName}
+                  </div>
+                  <div>
+                    <Link to={`/messages/${user.id}`}>
+                      <CustomBtn edit>
+                        Message <IoIosSend />
+                      </CustomBtn>
+                    </Link>
+                  </div>
+                </FlexBox>
               )}
             </h4>
           )}

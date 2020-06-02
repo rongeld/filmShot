@@ -51,10 +51,15 @@ export const CustomButtonContainer = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
   transition: all 0.3s ease;
   position: relative;
   ${getButtonStyles}
   ${stylize}
+
+  svg {
+    margin-left: 5px;
+  }
 
   &:hover {
     ${hoverStyles}

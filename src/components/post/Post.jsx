@@ -65,7 +65,7 @@ const Post = ({
       </div>
       <PostText>{description}</PostText>
 
-      <FlexBox justify-content="space-between">
+      {/* <FlexBox justify-content="space-between">
         <Footer>
           <BsHeart />
           <p>You and 201 others like this</p>
@@ -80,7 +80,7 @@ const Post = ({
             54
           </FlexBox>
         </Footer>
-      </FlexBox>
+      </FlexBox> */}
     </FlexBox>
   );
 };
