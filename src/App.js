@@ -1,12 +1,16 @@
-import React, { Fragment, Suspense, lazy } from 'react';
+import React, { Fragment, Suspense, lazy, useEffect } from 'react';
 import { Route, useLocation, Redirect, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import socketIOClient from 'socket.io-client';
+import { useDispatch } from 'react-redux';
 import GlobalStyle, { AppWrapper } from 'styles/global-styles';
 import ProtectedRoute from 'components/routes/ProtectedRoute';
 import Loading from 'components/loading-component/Loading';
 import Header from 'components/header/Header';
+import NotificationBar from 'components/notification-bar/NotificationBar';
 import { selectCurrentUser } from 'redux/user/user-selector';
+import { addMessageSocket } from 'redux/messages/messages-actions';
+import { addMessageNotification } from 'redux/notifications/notifications-actions';
 
 const Landing = lazy(() => import('pages/landing/Landing'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
@@ -15,13 +19,31 @@ const NotFoundPage = lazy(() => import('pages/not-found/NotFoundPage'));
 const Messages = lazy(() => import('pages/messages/Messages'));
 
 function App() {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isUser = useSelector(selectCurrentUser);
+
+  useEffect(() => {
+    const socket = socketIOClient(process.env.REACT_APP_URL);
+
+    socket.on('messages', data => {
+      if (!pathname.includes('messages') && data.from !== isUser._id) {
+        dispatch(addMessageNotification(data));
+      } else {
+        dispatch(addMessageSocket(data));
+      }
+    });
+
+    return () => {
+      socket.removeListener('messages');
+    };
+  }, []);
 
   return (
     <Fragment>
       <AppWrapper>
         <Route render={() => pathname !== '/landing' && <Header />} />
+        <Route render={() => pathname !== '/landing' && <NotificationBar />} />
         <Suspense fallback={<Loading />}>
           <Switch>
             <Route

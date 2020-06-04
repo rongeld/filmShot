@@ -31,3 +31,7 @@ export const selectDialogStatus = createSelector(
   [selectDialog],
   dialog => dialog.isLoading
 );
+export const selectNotifications = createSelector(
+  [selectMessages],
+  messages => messages.notifications
+);

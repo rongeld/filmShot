@@ -6,11 +6,12 @@ import modalReducer from './modal/modal-reducer';
 import postReducer from './post/post-reducer';
 import messagesReducer from './messages/messages-reducer';
 import usersReducer from './users/users-reducer';
+import notificationsReducer from './notifications/notifications-reducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user']
+  whitelist: ['user', 'notifications']
 };
 
 const rootReducer = combineReducers({
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   post: postReducer,
   messages: messagesReducer,
-  users: usersReducer
+  users: usersReducer,
+  notifications: notificationsReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

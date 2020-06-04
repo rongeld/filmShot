@@ -9,6 +9,9 @@ export const HeaderWrapper = styled.header`
   z-index: 5;
   width: 100%;
 `;
+export const RelativeBox = styled.header`
+  position: relative;
+`;
 export const LogoWrapper = styled.div`
   margin-left: -45px;
 
