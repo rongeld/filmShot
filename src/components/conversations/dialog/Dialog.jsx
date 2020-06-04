@@ -6,7 +6,8 @@ import Avatar from 'components/avatar/Avatar';
 import { setCoSpeakerData } from 'redux/messages/messages-actions';
 import { selectCurrentUser } from 'redux/user/user-selector';
 import { FlexBox } from 'components/shared/SharedStyles';
-import { UserName, Time, LastMessage, Wrapper } from './DialogStyles';
+import { UserName, Time, LastMessage, Wrapper, Box } from './DialogStyles';
+import useWindowWidth from 'utils/windowWidthHook';
 
 const Dialog = ({ user, updatedAt, lastMessage, noConvo, ...otherProps }) => {
   let coSpeaker;
@@ -27,22 +28,30 @@ const Dialog = ({ user, updatedAt, lastMessage, noConvo, ...otherProps }) => {
       dispatch(setCoSpeakerData(coSpeaker));
     }
   }, [user, dispatch, id]);
+
+  const width = useWindowWidth();
   return (
     <Wrapper to={`/messages/${_id}`}>
-      <FlexBox background="none" align-items="center">
+      <Box>
         <Avatar width="50px" height="50px" image={photo} flex="0 0 50px" />
-        <FlexBox background="none" flex-direction="column" margin-left="25px">
-          <FlexBox background="none" align-items="flex-end">
-            <UserName>{`${firstName} ${lastName}`}</UserName>
-            {!noConvo && (
-              <Time>
-                {moment.duration(currentDate.diff(updatedAt)).humanize()} ago
-              </Time>
-            )}
+        {width > 700 && (
+          <FlexBox background="none" flex-direction="column" margin-left="25px">
+            <FlexBox background="none" align-items="flex-end">
+              <UserName>{`${firstName} ${lastName}`}</UserName>
+              {!noConvo && (
+                <Time>
+                  {moment.duration(currentDate.diff(updatedAt)).humanize()} ago
+                </Time>
+              )}
+            </FlexBox>
+            <LastMessage>
+              {lastMessage?.length > 7
+                ? lastMessage.slice(0, 7) + '...'
+                : lastMessage}
+            </LastMessage>
           </FlexBox>
-          <LastMessage>{lastMessage}</LastMessage>
-        </FlexBox>
-      </FlexBox>
+        )}
+      </Box>
     </Wrapper>
   );
 };

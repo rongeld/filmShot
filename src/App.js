@@ -27,7 +27,10 @@ function App() {
     const socket = socketIOClient(process.env.REACT_APP_URL);
 
     socket.on('messages', data => {
-      if (!pathname.includes('messages') && data.from !== isUser._id) {
+      if (
+        !window.location.href.includes('messages') &&
+        data.from !== isUser?.id
+      ) {
         dispatch(addMessageNotification(data));
       } else {
         dispatch(addMessageSocket(data));

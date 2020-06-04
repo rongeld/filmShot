@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 export const Body = styled.div`
   padding: 30px 0;
   background: #272f37;
-  height: 700px;
+  height: 80vh;
   max-width: 400px;
   overflow-y: scroll;
   width: 100%;
@@ -38,5 +38,10 @@ export const TabComponent = styled(Tab)`
 
   h5 {
     text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    text-align: center;
+    padding: 10px;
   }
 `;
