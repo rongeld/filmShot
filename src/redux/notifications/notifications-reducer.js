@@ -2,32 +2,39 @@ import produce from 'immer';
 import NotificationsActionTypes from './notifications-types';
 
 const INITIAL_STATE = {
-  messages: [],
+  messages: {},
   err: null
 };
 
 const notificationsReducer = produce((draft = INITIAL_STATE, action) => {
   switch (action.type) {
     case NotificationsActionTypes.ADD_MESSAGE_NOTIFICATION:
-      let isIn = false;
-      draft.messages.forEach(item => {
-        if (item.from === action.payload.from) {
-          item.numberOfMessages += 1;
-          isIn = true;
-        }
-      });
-      if (!isIn) {
-        action.payload.numberOfMessages = 1;
-        draft.messages.push(action.payload);
+      if (draft.messages[action.payload.from]) {
+        draft.messages[action.payload.from].numberOfMessages += 1;
+        return draft;
       }
+      action.payload.numberOfMessages = 1;
+      draft.messages[action.payload.from] = action.payload;
       return draft;
     case NotificationsActionTypes.REMOVE_MESSAGE_NOTIFICATION:
-      draft.messages = draft.messages.filter(
-        item => item.id !== action.payload
-      );
+      delete draft.messages[action.payload];
       return draft;
     case NotificationsActionTypes.REMOVE_MESSAGES_NOTIFICATION:
-      draft.messages = [];
+      draft.messages = {};
+      return draft;
+    case NotificationsActionTypes.FETCH_UNREAD_MESSAGES_SUCCESS:
+      // eslint-disable-next-line no-case-declarations
+      const updatedObject = action.payload.reduce((result, item) => {
+        if (result[item.from]) {
+          result[item.from].numberOfMessages += 1;
+          return result;
+        }
+        item.numberOfMessages = 1;
+        item.senderInfo = item.senderInfo[0];
+        result[item.from] = item;
+        return result;
+      }, {});
+      draft.messages = updatedObject;
       return draft;
     default:
       return draft;

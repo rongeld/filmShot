@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, lazy, useEffect } from 'react';
+import React, { Fragment, Suspense, lazy, useEffect, useState } from 'react';
 import { Route, useLocation, Redirect, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import socketIOClient from 'socket.io-client';
@@ -9,8 +9,14 @@ import Loading from 'components/loading-component/Loading';
 import Header from 'components/header/Header';
 import NotificationBar from 'components/notification-bar/NotificationBar';
 import { selectCurrentUser } from 'redux/user/user-selector';
-import { addMessageSocket } from 'redux/messages/messages-actions';
-import { addMessageNotification } from 'redux/notifications/notifications-actions';
+import {
+  addMessageSocket,
+  fetchDialogStart
+} from 'redux/messages/messages-actions';
+import {
+  addMessageNotification,
+  fetchUnreadMessagesStart
+} from 'redux/notifications/notifications-actions';
 
 const Landing = lazy(() => import('pages/landing/Landing'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
@@ -19,6 +25,7 @@ const NotFoundPage = lazy(() => import('pages/not-found/NotFoundPage'));
 const Messages = lazy(() => import('pages/messages/Messages'));
 
 function App() {
+  const [firstAccess, setFirstAccess] = useState(true);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isUser = useSelector(selectCurrentUser);
@@ -28,12 +35,10 @@ function App() {
 
     socket.on('messages', data => {
       if (
-        !window.location.href.includes('messages') &&
+        !window.location.href.includes('messages/') &&
         data.from !== isUser?.id
       ) {
         dispatch(addMessageNotification(data));
-      } else {
-        dispatch(addMessageSocket(data));
       }
     });
 
@@ -41,6 +46,13 @@ function App() {
       socket.removeListener('messages');
     };
   }, []);
+
+  useEffect(() => {
+    if (!pathname.includes('/landing') && firstAccess) {
+      dispatch(fetchUnreadMessagesStart('messages=unread'));
+      setFirstAccess(false);
+    }
+  }, [pathname]);
 
   return (
     <Fragment>

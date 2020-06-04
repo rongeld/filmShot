@@ -12,25 +12,22 @@ import {
 
 const NotificationBar = () => {
   const notifications = useSelector(selectMessagesNotifications);
-
-  return (
-    notifications.length && (
-      <Wrapper>
-        <Container>
-          <Body>
-            {notifications.map(({ senderInfo, numberOfMessages }) => (
-              <UserMessage to={`/messages/${senderInfo.id}`}>
-                <Avatar image={senderInfo.photo} />
-                <NumberOfUnreadMessages>
-                  {numberOfMessages}
-                </NumberOfUnreadMessages>
-              </UserMessage>
-            ))}
-          </Body>
-        </Container>
-      </Wrapper>
-    )
-  );
+  return Object.keys(notifications).length ? (
+    <Wrapper>
+      <Container>
+        <Body>
+          {Object.keys(notifications).map(item => (
+            <UserMessage to={`/messages/${item}`} key={item}>
+              <Avatar image={notifications[item].senderInfo.photo} />
+              <NumberOfUnreadMessages>
+                {notifications[item].numberOfMessages}
+              </NumberOfUnreadMessages>
+            </UserMessage>
+          ))}
+        </Body>
+      </Container>
+    </Wrapper>
+  ) : null;
 };
 
 export default NotificationBar;

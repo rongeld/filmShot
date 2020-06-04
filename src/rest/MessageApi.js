@@ -7,9 +7,7 @@ class ProductsAPI {
   }
 
   static async getDialog(id) {
-    const response = await Api.get(
-      `/messages/conversations/query?userId=${id}`
-    );
+    const response = await Api.get(`/messages/conversations/query?${id}`);
     return response;
   }
 

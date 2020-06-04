@@ -1,11 +1,9 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import socketIOClient from 'socket.io-client';
-import {
-  selectConversationsData,
-  selectConversationsStatus
-} from 'redux/messages/messages-selector';
+import { selectConversationsData } from 'redux/messages/messages-selector';
 import { useParams } from 'react-router-dom';
+import { selectMessagesNotifications } from 'redux/notifications/notifications-selector';
 import {
   getConversationsStart,
   removeCoSpeaker
@@ -17,7 +15,7 @@ const Convos = () => {
   const [newConversation, setNewConversation] = useState(null);
   const { id } = useParams();
   const conversations = useSelector(selectConversationsData);
-  const isFetching = useSelector(selectConversationsStatus);
+  const notifications = useSelector(selectMessagesNotifications);
 
   const fetchAllConversations = useCallback(
     () => dispatch(getConversationsStart()),
@@ -44,6 +42,7 @@ const Convos = () => {
           user={item.recipientObj}
           updatedAt={item.updatedAt}
           lastMessage={item.lastMessage}
+          newMessages={notifications[item.recipients[0]]}
         />
       ))}
     </div>

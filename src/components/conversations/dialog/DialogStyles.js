@@ -27,6 +27,7 @@ export const Time = styled.span`
 export const Box = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
   justify-content: flex-start;
   @media (max-width: 700px) {
     justify-content: center;
@@ -34,9 +35,9 @@ export const Box = styled.div`
 `;
 export const LastMessage = styled.p`
   margin: 0;
-  color: white;
+  color: ${({ newMessages }) => (newMessages ? '#0084ff' : 'white')};
   opacity: 0.65;
-  font-weight: 200;
+  font-weight: ${({ newMessages }) => (newMessages ? 700 : 200)};
   font-size: 13px;
   margin-top: 4px;
 `;

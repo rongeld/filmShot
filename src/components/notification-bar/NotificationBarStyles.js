@@ -28,6 +28,7 @@ export const NumberOfUnreadMessages = styled.span`
   color: white;
   right: ${({ right }) => right || '-8px'};
   top: ${({ top }) => top || '-8px'};
+  left: ${({ left }) => left || 'auto'};
   display: flex;
   justify-content: center;
   align-items: center;

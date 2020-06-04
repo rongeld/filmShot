@@ -1,6 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import MessageApi from 'rest/MessageApi';
+import { removeMessageNotification } from 'redux/notifications/notifications-actions';
 import MessagesActionTypes from './messages-types';
 import {
   getConversationsSuccess,
@@ -21,6 +22,9 @@ export function* getConversations() {
 }
 export function* fetchDialog({ payload }) {
   try {
+    if (payload.includes('userId')) {
+      yield put(removeMessageNotification(payload.split('=')[1]));
+    }
     const { data } = yield MessageApi.getDialog(payload);
     yield put(fetchDialogSuccess(data));
   } catch (err) {

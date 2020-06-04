@@ -8,5 +8,9 @@ export const selectMessagesNotifications = createSelector(
 );
 export const selectTotalAmountOfMessage = createSelector(
   [selectMessagesNotifications],
-  messages => messages.reduce((res, item) => res + item.numberOfMessages, 0)
+  messages =>
+    Object.keys(messages).reduce(
+      (res, item) => res + messages[item].numberOfMessages,
+      0
+    )
 );

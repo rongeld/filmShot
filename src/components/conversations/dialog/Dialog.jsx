@@ -7,9 +7,17 @@ import { setCoSpeakerData } from 'redux/messages/messages-actions';
 import { selectCurrentUser } from 'redux/user/user-selector';
 import { FlexBox } from 'components/shared/SharedStyles';
 import { UserName, Time, LastMessage, Wrapper, Box } from './DialogStyles';
+import { NumberOfUnreadMessages } from 'components/notification-bar/NotificationBarStyles';
 import useWindowWidth from 'utils/windowWidthHook';
 
-const Dialog = ({ user, updatedAt, lastMessage, noConvo, ...otherProps }) => {
+const Dialog = ({
+  user,
+  updatedAt,
+  lastMessage,
+  newMessages,
+  noConvo,
+  ...otherProps
+}) => {
   let coSpeaker;
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -44,12 +52,17 @@ const Dialog = ({ user, updatedAt, lastMessage, noConvo, ...otherProps }) => {
                 </Time>
               )}
             </FlexBox>
-            <LastMessage>
+            <LastMessage newMessages={!!newMessages}>
               {lastMessage?.length > 7
                 ? lastMessage.slice(0, 7) + '...'
                 : lastMessage}
             </LastMessage>
           </FlexBox>
+        )}
+        {newMessages && (
+          <NumberOfUnreadMessages right="auto" left="0">
+            {newMessages.numberOfMessages}
+          </NumberOfUnreadMessages>
         )}
       </Box>
     </Wrapper>

@@ -49,21 +49,21 @@ const Chat = () => {
 
   useEffect(() => {
     if (id) {
-      fetchDialog(id);
+      fetchDialog(`userId=${id}`);
     }
   }, [fetchDialog, id]);
 
-  // useEffect(() => {
-  //   const socket = socketIOClient(process.env.REACT_APP_URL);
+  useEffect(() => {
+    const socket = socketIOClient(process.env.REACT_APP_URL);
 
-  //   socket.on('messages', data => {
-  //     dispatch(addMessageSocket(data));
-  //   });
+    socket.on('messages', data => {
+      dispatch(addMessageSocket(data));
+    });
 
-  //   return () => {
-  //     socket.removeListener('messages');
-  //   };
-  // }, []);
+    return () => {
+      socket.removeListener('messages');
+    };
+  }, []);
 
   const onSubmit = async data => {
     data.to = id;
