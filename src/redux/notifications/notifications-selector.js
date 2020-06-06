@@ -6,6 +6,10 @@ export const selectMessagesNotifications = createSelector(
   [selectNotifications],
   notifications => notifications.messages
 );
+export const selectOnlineUsers = createSelector(
+  [selectNotifications],
+  notifications => notifications.onlineUsers
+);
 export const selectTotalAmountOfMessage = createSelector(
   [selectMessagesNotifications],
   messages =>

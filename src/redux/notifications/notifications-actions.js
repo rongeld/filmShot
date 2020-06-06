@@ -25,3 +25,8 @@ export const fetchUnreadMessagesFailure = err => ({
   type: NotificationsActionTypes.FETCH_UNREAD_MESSAGES_FAILURE,
   payload: err
 });
+
+export const setOnlineUsers = users => ({
+  type: NotificationsActionTypes.SET_ONLINE_USERS,
+  payload: users
+});

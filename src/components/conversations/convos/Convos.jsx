@@ -23,17 +23,13 @@ const Convos = () => {
   );
   useEffect(() => {
     fetchAllConversations();
-  }, [newConversation]);
+  }, []);
+
   useEffect(() => {
     if (!id) {
       dispatch(removeCoSpeaker());
     }
   }, [id]);
-
-  useEffect(() => {
-    const socket = socketIOClient(process.env.REACT_APP_URL);
-    socket.on('messages', data => setNewConversation(data));
-  }, []);
   return (
     <div>
       {conversations.map(item => (

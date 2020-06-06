@@ -27,7 +27,7 @@ const ProfileDropdown = () => {
         tabIndex={0}
         style={{ outline: 'none' }}
       >
-        <Avatar image={currentUser?.photo} />
+        <Avatar image={currentUser?.photo} id={currentUser?._id} />
       </div>
 
       {currentUser && (

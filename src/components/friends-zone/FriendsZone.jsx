@@ -25,7 +25,7 @@ const FriendsZone = ({
         pd={pd}
       >
         <FlexBox align-items="center">
-          <Avatar image={photo} />
+          <Avatar image={photo} id={_id} />
           <UserInfo>
             <h5 style={{ color: 'black' }}>{`${firstName} ${lastName}`}</h5>
           </UserInfo>

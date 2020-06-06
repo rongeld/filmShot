@@ -23,6 +23,7 @@ const SharePost = () => {
     >
       <Avatar
         image={currentUser.photo}
+        id={currentUser._id}
         margin-right="20px"
         transform="scale(1.5)"
       />

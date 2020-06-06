@@ -9,14 +9,7 @@ import Loading from 'components/loading-component/Loading';
 import Header from 'components/header/Header';
 import NotificationBar from 'components/notification-bar/NotificationBar';
 import { selectCurrentUser } from 'redux/user/user-selector';
-import {
-  addMessageSocket,
-  fetchDialogStart
-} from 'redux/messages/messages-actions';
-import {
-  addMessageNotification,
-  fetchUnreadMessagesStart
-} from 'redux/notifications/notifications-actions';
+import { fetchUnreadMessagesStart } from 'redux/notifications/notifications-actions';
 
 const Landing = lazy(() => import('pages/landing/Landing'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
@@ -29,23 +22,6 @@ function App() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isUser = useSelector(selectCurrentUser);
-
-  useEffect(() => {
-    const socket = socketIOClient(process.env.REACT_APP_URL);
-
-    socket.on('messages', data => {
-      if (
-        !window.location.href.includes('messages/') &&
-        data.from !== isUser?.id
-      ) {
-        dispatch(addMessageNotification(data));
-      }
-    });
-
-    return () => {
-      socket.removeListener('messages');
-    };
-  }, []);
 
   useEffect(() => {
     if (!pathname.includes('/landing') && firstAccess) {

@@ -9,8 +9,7 @@ import { animateScroll } from 'react-scroll';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchDialogStart,
-  sendMessageStart,
-  addMessageSocket
+  sendMessageStart
 } from 'redux/messages/messages-actions';
 import Avatar from 'components/avatar/Avatar';
 import Loading from 'components/loading-component/Loading';
@@ -53,18 +52,6 @@ const Chat = () => {
     }
   }, [fetchDialog, id]);
 
-  useEffect(() => {
-    const socket = socketIOClient(process.env.REACT_APP_URL);
-
-    socket.on('messages', data => {
-      dispatch(addMessageSocket(data));
-    });
-
-    return () => {
-      socket.removeListener('messages');
-    };
-  }, []);
-
   const onSubmit = async data => {
     data.to = id;
     await dispatch(sendMessageStart(data));
@@ -84,7 +71,7 @@ const Chat = () => {
         {coSpeaker ? (
           <Link to={`/profile/${coSpeaker._id}`}>
             <FlexBox align-items="center" padding="20px">
-              <Avatar image={coSpeaker.photo} />
+              <Avatar image={coSpeaker.photo} id={coSpeaker._id} />
               <h5 style={{ margin: '0 0 0 20px' }}>
                 {`${coSpeaker.firstName} ${coSpeaker.lastName}`}
               </h5>
@@ -93,7 +80,7 @@ const Chat = () => {
         ) : (
           <Link to={`/profile/${currentUser.id}`}>
             <FlexBox align-items="center" padding="20px">
-              <Avatar image={currentUser.photo} />
+              <Avatar image={currentUser.photo} id={currentUser._id} />
               <h5 style={{ margin: '0 0 0 20px' }}>
                 {`${currentUser.firstName} ${currentUser.lastName}`}
               </h5>

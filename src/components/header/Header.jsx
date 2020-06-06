@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import socketIOClient from 'socket.io-client';
 import { NavLink } from 'react-router-dom';
 import { GoSearch } from 'react-icons/go';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Container, FlexBox, Nav } from 'components/shared/SharedStyles';
 import Logo from 'components/logo/Logo';
 import ProfileDropdown from 'components/profile-dropdown/ProfileDropdown';
 import Input from 'components/form/Input/Input';
 import { selectTotalAmountOfMessage } from 'redux/notifications/notifications-selector';
+import { selectCurrentUser } from 'redux/user/user-selector';
+import {
+  setOnlineUsers,
+  addMessageNotification
+} from 'redux/notifications/notifications-actions';
 import { NumberOfUnreadMessages } from 'components/notification-bar/NotificationBarStyles';
 
+import {
+  addMessageSocket,
+  getConversationsStart
+} from 'redux/messages/messages-actions';
 import {
   HeaderWrapper,
   LogoWrapper,
@@ -17,12 +27,37 @@ import {
 } from './HeaderStyles';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const amountOfMessages = useSelector(selectTotalAmountOfMessage);
   const [messages, setMessages] = useState(amountOfMessages);
+  const isUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     setMessages(amountOfMessages);
+    document.title = `${
+      amountOfMessages ? `(${amountOfMessages})` : ''
+    } Film Shot`;
   }, [amountOfMessages]);
+  useEffect(() => {
+    const socket = socketIOClient(process.env.REACT_APP_URL);
+    socket.on('logged', data => {
+      dispatch(setOnlineUsers(data));
+    });
+
+    socket.on('messages', data => {
+      if (
+        !window.location.href.includes(`messages/${data.from}`) &&
+        isUser._id === data.to
+      ) {
+        dispatch(addMessageNotification(data));
+      } else {
+        dispatch(addMessageSocket(data));
+      }
+      dispatch(getConversationsStart());
+    });
+
+    socket.emit('logged', { _id: isUser._id, photo: isUser.photo });
+  }, []);
 
   return (
     <HeaderWrapper>

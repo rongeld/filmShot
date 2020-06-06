@@ -18,7 +18,10 @@ const NotificationBar = () => {
         <Body>
           {Object.keys(notifications).map(item => (
             <UserMessage to={`/messages/${item}`} key={item}>
-              <Avatar image={notifications[item].senderInfo.photo} />
+              <Avatar
+                image={notifications[item].senderInfo.photo}
+                id={notifications[item].senderInfo._id}
+              />
               <NumberOfUnreadMessages>
                 {notifications[item].numberOfMessages}
               </NumberOfUnreadMessages>

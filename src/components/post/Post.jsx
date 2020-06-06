@@ -40,7 +40,7 @@ const Post = ({
     >
       <Header>
         <div>
-          <Avatar image={postAuthorPhoto} />
+          <Avatar image={postAuthorPhoto} id={id} />
           <div>
             <h5>
               <Link to={`/profile/${id}`}>{`${firstName} ${lastName}`}</Link>

@@ -28,7 +28,7 @@ const UserInfo = () => {
       <Header
         bg={`${process.env.REACT_APP_FILES_API}/${currentUser.profileCover}`}
       >
-        <Avatar image={currentUser.photo} />
+        <Avatar image={currentUser.photo} id={currentUser._id} />
       </Header>
       <Quote>
         <h3

@@ -3,6 +3,7 @@ import NotificationsActionTypes from './notifications-types';
 
 const INITIAL_STATE = {
   messages: {},
+  onlineUsers: [],
   err: null
 };
 
@@ -21,6 +22,9 @@ const notificationsReducer = produce((draft = INITIAL_STATE, action) => {
       return draft;
     case NotificationsActionTypes.REMOVE_MESSAGES_NOTIFICATION:
       draft.messages = {};
+      return draft;
+    case NotificationsActionTypes.SET_ONLINE_USERS:
+      draft.onlineUsers = action.payload;
       return draft;
     case NotificationsActionTypes.FETCH_UNREAD_MESSAGES_SUCCESS:
       // eslint-disable-next-line no-case-declarations

@@ -39,9 +39,22 @@ const Dialog = ({
 
   const width = useWindowWidth();
   return (
-    <Wrapper to={`/messages/${_id}`}>
+    <Wrapper
+      to={{
+        pathname: `/messages/${_id}`,
+        state: {
+          guy: coSpeaker
+        }
+      }}
+    >
       <Box>
-        <Avatar width="50px" height="50px" image={photo} flex="0 0 50px" />
+        <Avatar
+          width="50px"
+          height="50px"
+          image={photo}
+          id={_id}
+          flex="0 0 50px"
+        />
         {width > 700 && (
           <FlexBox background="none" flex-direction="column" margin-left="25px">
             <FlexBox background="none" align-items="flex-end">
