@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import PostAPI from 'rest/PostApi';
-import { closeModal } from 'redux/modal/modal-actions';
+import { closeModal, addDataToModal } from 'redux/modal/modal-actions';
 import PostActionTypes from './post-types';
 import {
   createPostSuccess,
@@ -11,7 +11,9 @@ import {
   fetchPostsFailure,
   fetchPostsStart,
   deletePostSuccess,
-  deletePostError
+  deletePostError,
+  createPostCommentSuccess,
+  createPostCommentError
 } from './post-actions';
 
 export function* createPost({ payload }) {
@@ -43,6 +45,16 @@ export function* deletePost({ payload }) {
     yield put(deletePostError(err));
   }
 }
+export function* createPostComment({ payload }) {
+  try {
+    const { data } = yield PostAPI.createComment(payload);
+    yield put(createPostCommentSuccess(data));
+    yield put(addDataToModal(data));
+    yield put(fetchPostsStart());
+  } catch (err) {
+    yield put(createPostCommentError(err));
+  }
+}
 
 export function* onCreatePostStart() {
   yield takeLatest(PostActionTypes.CREATE_POST_START, createPost);
@@ -53,7 +65,18 @@ export function* onGetAllPosts() {
 export function* onDeletePost() {
   yield takeLatest(PostActionTypes.DELETE_POST_START, deletePost);
 }
+export function* onCreatePostComment() {
+  yield takeLatest(
+    PostActionTypes.CREATE_POST_COMMENT_START,
+    createPostComment
+  );
+}
 
 export function* postSagas() {
-  yield all([call(onCreatePostStart), call(onGetAllPosts), call(onDeletePost)]);
+  yield all([
+    call(onCreatePostStart),
+    call(onGetAllPosts),
+    call(onDeletePost),
+    call(onCreatePostComment)
+  ]);
 }

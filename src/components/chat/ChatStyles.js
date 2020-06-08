@@ -35,8 +35,8 @@ export const ChatBody = styled.div`
 `;
 
 export const Footer = styled.div`
-  padding: 15px 15px 15px 60px;
-  background: white;
+  padding: ${({ noPadding }) => (noPadding ? 'none' : '15px 15px 15px 60px')};
+  background: ${({ noBackgound }) => (noBackgound ? 'none' : 'white')};
   display: flex;
   flex: 1;
   justify-content: flex-start;
@@ -78,6 +78,8 @@ export const TextInput = styled.textarea`
   outline: none;
   padding-top: 16px;
   resize: none;
+  background: ${({ noBackgound }) => (noBackgound ? 'none' : 'white')};
+  color: ${({ noBackgound }) => (noBackgound ? 'white' : 'black')};
 `;
 export const ChatWrapper = styled.div`
   flex: 5;

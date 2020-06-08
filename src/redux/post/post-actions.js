@@ -50,3 +50,19 @@ export const deletePostError = err => ({
   type: PostActionTypes.DELETE_POST_FAILURE,
   payload: err
 });
+
+// Delete post
+export const createPostCommentStart = id => ({
+  type: PostActionTypes.CREATE_POST_COMMENT_START,
+  payload: id
+});
+
+export const createPostCommentSuccess = data => ({
+  type: PostActionTypes.CREATE_POST_COMMENT_SUCCESS,
+  payload: data
+});
+
+export const createPostCommentError = err => ({
+  type: PostActionTypes.CREATE_POST_COMMENT_FAILURE,
+  payload: err
+});

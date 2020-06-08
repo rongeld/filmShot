@@ -3,7 +3,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams, Link } from 'react-router-dom';
-import socketIOClient from 'socket.io-client';
 import { IoIosSend } from 'react-icons/io';
 import { animateScroll } from 'react-scroll';
 import { useSelector, useDispatch } from 'react-redux';

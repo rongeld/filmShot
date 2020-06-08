@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 import { IoIosOptions, IoMdShare } from 'react-icons/io';
+import { openModal } from 'redux/modal/modal-actions';
 import { BsHeart } from 'react-icons/bs';
 import { AiOutlineWechat } from 'react-icons/ai';
 import { selectCurrentUser } from 'redux/user/user-selector';
@@ -10,10 +11,11 @@ import { FlexBox } from 'components/shared/SharedStyles';
 import Avatar from 'components/avatar/Avatar';
 import { deletePostStart } from 'redux/post/post-actions';
 
-import { Header, PostText, Footer, IconDropdown } from './PostStyles';
+import { Header, PostText, Footer, IconDropdown, Box } from './PostStyles';
 
 const Post = ({
   description,
+  comments,
   author: { firstName, lastName, id, photo: postAuthorPhoto },
   photo,
   id: postId,
@@ -22,6 +24,23 @@ const Post = ({
   const currentDate = moment();
   const { _id: author } = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const openModalHandler = useCallback(
+    () =>
+      dispatch(
+        openModal({
+          name: 'CreatePostComment',
+          additionalData: {
+            photo,
+            firstName,
+            lastName,
+            postAuthorPhoto,
+            comments,
+            postId
+          }
+        })
+      ),
+    [dispatch]
+  );
 
   const deletePost = useCallback(() => dispatch(deletePostStart(postId)), [
     dispatch,
@@ -65,22 +84,18 @@ const Post = ({
       </div>
       <PostText>{description}</PostText>
 
-      {/* <FlexBox justify-content="space-between">
+      <FlexBox justify-content="space-between">
         <Footer>
           <BsHeart />
           <p>You and 201 others like this</p>
         </Footer>
         <Footer>
-          <FlexBox>
+          <Box onClick={openModalHandler}>
             <AiOutlineWechat />
-            54
-          </FlexBox>
-          <FlexBox>
-            <IoMdShare />
-            54
-          </FlexBox>
+            {comments.length}
+          </Box>
         </Footer>
-      </FlexBox> */}
+      </FlexBox>
     </FlexBox>
   );
 };

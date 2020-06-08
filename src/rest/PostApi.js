@@ -11,6 +11,11 @@ class ProductsAPI {
     return response;
   }
 
+  static async createComment(data) {
+    const response = await Api.post('/comments', data);
+    return response;
+  }
+
   static async get() {
     const response = await Api.get('/posts?sort=-createdAt');
     return response;
