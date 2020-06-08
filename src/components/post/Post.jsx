@@ -86,8 +86,8 @@ const Post = ({
 
       <FlexBox justify-content="space-between">
         <Footer>
-          <BsHeart />
-          <p>You and 201 others like this</p>
+          {/* <BsHeart />
+          <p>You and 201 others like this</p> */}
         </Footer>
         <Footer>
           <Box onClick={openModalHandler}>
