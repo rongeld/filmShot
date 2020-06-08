@@ -6,11 +6,11 @@ import { useDispatch } from 'react-redux';
 import GlobalStyle, { AppWrapper } from 'styles/global-styles';
 import ProtectedRoute from 'components/routes/ProtectedRoute';
 import Loading from 'components/loading-component/Loading';
+import Header from 'components/header/Header';
 import NotificationBar from 'components/notification-bar/NotificationBar';
 import { selectCurrentUser } from 'redux/user/user-selector';
 import { fetchUnreadMessagesStart } from 'redux/notifications/notifications-actions';
 
-const Header = lazy(() => import('components/header/Header'));
 const Landing = lazy(() => import('pages/landing/Landing'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
 const Profile = lazy(() => import('pages/profile/Profile'));
@@ -33,9 +33,9 @@ function App() {
   return (
     <Fragment>
       <AppWrapper>
+        <Route render={() => pathname !== '/landing' && <Header />} />
         <Route render={() => pathname !== '/landing' && <NotificationBar />} />
         <Suspense fallback={<Loading />}>
-          <Route render={() => pathname !== '/landing' && <Header />} />
           <Switch>
             <Route
               path="/landing"

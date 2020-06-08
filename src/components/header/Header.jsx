@@ -47,7 +47,7 @@ const Header = () => {
     socket.on('messages', data => {
       if (
         !window.location.href.includes(`messages/${data.from}`) &&
-        isUser._id === data.to
+        isUser?._id === data.to
       ) {
         dispatch(addMessageNotification(data));
       } else {
@@ -56,7 +56,7 @@ const Header = () => {
       dispatch(getConversationsStart());
     });
 
-    socket.emit('logged', { _id: isUser._id, photo: isUser.photo });
+    socket.emit('logged', { _id: isUser?._id, photo: isUser?.photo });
   }, []);
 
   return (
