@@ -8,6 +8,10 @@ export const selectPostLoading = createSelector(
   [selectPost],
   post => post.isLoading
 );
+export const selectPostLiking = createSelector(
+  [selectPost],
+  post => post.isLiking
+);
 export const selectPostsFetching = createSelector(
   [selectPost],
   post => post.isFetching

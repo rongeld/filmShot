@@ -66,3 +66,16 @@ export const createPostCommentError = err => ({
   type: PostActionTypes.CREATE_POST_COMMENT_FAILURE,
   payload: err
 });
+
+export const likeUnlikeStart = data => ({
+  type: PostActionTypes.POST_LIKE_UNLIKE_START,
+  payload: data
+});
+export const likeUnlikeSuccess = data => ({
+  type: PostActionTypes.POST_LIKE_UNLIKE_SUCCESS,
+  payload: data
+});
+export const likeUnlikeFailure = data => ({
+  type: PostActionTypes.POST_LIKE_UNLIKE_FAILURE,
+  payload: data
+});

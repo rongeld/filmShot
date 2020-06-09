@@ -25,6 +25,13 @@ class ProductsAPI {
     const response = await Api.delete(`/posts/${id}`);
     return response;
   }
+
+  static async likeUnlike({ status, id }) {
+    const response = await Api.post(
+      `/posts/${status ? 'unlike' : 'like'}/${id}`
+    );
+    return response;
+  }
 }
 
 export default ProductsAPI;

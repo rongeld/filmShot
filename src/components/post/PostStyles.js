@@ -116,6 +116,20 @@ export const Footer = styled.div`
     margin-right: 6px;
     position: relative;
     top: 2px;
+
+    fill: ${variables['theme-color']};
+  }
+
+  &:first-child {
+    svg {
+      cursor: pointer;
+      fill: ${({ isActive }) => (isActive ? variables['theme-color'] : 'grey')};
+
+      &:hover {
+        fill: ${({ isActive }) =>
+          !isActive ? variables['theme-color'] : 'grey'};
+      }
+    }
   }
 `;
 export const Box = styled.div`

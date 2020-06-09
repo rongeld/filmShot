@@ -4,11 +4,15 @@ import { selectAllPosts, selectPostsFetching } from 'redux/post/post-selector';
 import { fetchPostsStart } from 'redux/post/post-actions';
 import Post from 'components/post/Post';
 import Loading from 'components/loading-component/Loading';
+import { selectCurrentUser } from 'redux/user/user-selector';
 
 const Posts = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
   const isFetching = useSelector(selectPostsFetching);
+  const currentUser = useSelector(selectCurrentUser);
+
+  console.log(posts);
 
   const fetchAllPosts = useCallback(() => dispatch(fetchPostsStart()), [
     dispatch
@@ -20,7 +24,10 @@ const Posts = () => {
   return isFetching ? (
     <Loading />
   ) : (
-    posts && posts.map(post => <Post key={post._id} {...post} />)
+    posts &&
+      posts.map(post => (
+        <Post key={post._id} {...post} currentUserId={currentUser.id} />
+      ))
   );
 };
 

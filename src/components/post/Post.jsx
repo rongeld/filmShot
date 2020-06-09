@@ -1,15 +1,18 @@
-import React, { useCallback } from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
-import { IoIosOptions, IoMdShare } from 'react-icons/io';
+import { IoIosOptions } from 'react-icons/io';
 import { openModal } from 'redux/modal/modal-actions';
 import { BsHeart } from 'react-icons/bs';
 import { AiOutlineWechat } from 'react-icons/ai';
+import { FaHeartbeat } from 'react-icons/fa';
 import { selectCurrentUser } from 'redux/user/user-selector';
 import { FlexBox } from 'components/shared/SharedStyles';
 import Avatar from 'components/avatar/Avatar';
-import { deletePostStart } from 'redux/post/post-actions';
+import { deletePostStart, likeUnlikeStart } from 'redux/post/post-actions';
+import { selectPostLiking } from 'redux/post/post-selector';
 
 import { Header, PostText, Footer, IconDropdown, Box } from './PostStyles';
 
@@ -18,12 +21,15 @@ const Post = ({
   comments,
   author: { firstName, lastName, id, photo: postAuthorPhoto },
   photo,
+  likes,
   id: postId,
-  createdAt
+  createdAt,
+  currentUserId
 }) => {
   const currentDate = moment();
   const { _id: author } = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const isLiking = useSelector(selectPostLiking);
   const openModalHandler = useCallback(
     () =>
       dispatch(
@@ -42,12 +48,31 @@ const Post = ({
     [dispatch]
   );
 
+  const memoizedValue = useMemo(() =>
+    likes.some(item => item.user === currentUserId)
+  );
+
   const deletePost = useCallback(() => dispatch(deletePostStart(postId)), [
     dispatch,
     postId
   ]);
+  const likeUnlike = useCallback(() =>
+    dispatch(
+      likeUnlikeStart({
+        status: memoizedValue,
+        id: postId
+      }),
+      [dispatch, postId]
+    )
+  );
   const deletePostHandler = () => {
     deletePost();
+  };
+
+  const likeUnlikeHandler = async () => {
+    if (!isLiking) {
+      likeUnlike();
+    }
   };
   return (
     <FlexBox
@@ -85,9 +110,18 @@ const Post = ({
       <PostText>{description}</PostText>
 
       <FlexBox justify-content="space-between">
-        <Footer>
-          {/* <BsHeart />
-          <p>You and 201 others like this</p> */}
+        <Footer isActive={memoizedValue}>
+          <div onClick={likeUnlikeHandler}>
+            {memoizedValue ? <FaHeartbeat /> : <BsHeart />}
+          </div>
+
+          <p>
+            {memoizedValue
+              ? likes.length > 1
+                ? `You and ${likes.length - 1} like this`
+                : 'Only you like this'
+              : `${likes.length} like this`}
+          </p>
         </Footer>
         <Footer>
           <Box onClick={openModalHandler}>

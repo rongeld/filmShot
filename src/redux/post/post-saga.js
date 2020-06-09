@@ -13,7 +13,9 @@ import {
   deletePostSuccess,
   deletePostError,
   createPostCommentSuccess,
-  createPostCommentError
+  createPostCommentError,
+  likeUnlikeSuccess,
+  likeUnlikeFailure
 } from './post-actions';
 
 export function* createPost({ payload }) {
@@ -52,6 +54,14 @@ export function* createPostComment({ payload }) {
     yield put(addDataToModal(data));
     yield put(fetchPostsStart());
   } catch (err) {
+    yield put(likeUnlikeFailure(err));
+  }
+}
+export function* likeUnlikepost({ payload }) {
+  try {
+    const { data } = yield PostAPI.likeUnlike(payload);
+    yield put(likeUnlikeSuccess(data));
+  } catch (err) {
     yield put(createPostCommentError(err));
   }
 }
@@ -65,6 +75,9 @@ export function* onGetAllPosts() {
 export function* onDeletePost() {
   yield takeLatest(PostActionTypes.DELETE_POST_START, deletePost);
 }
+export function* onLikeUnlikePost() {
+  yield takeLatest(PostActionTypes.POST_LIKE_UNLIKE_START, likeUnlikepost);
+}
 export function* onCreatePostComment() {
   yield takeLatest(
     PostActionTypes.CREATE_POST_COMMENT_START,
@@ -77,6 +90,7 @@ export function* postSagas() {
     call(onCreatePostStart),
     call(onGetAllPosts),
     call(onDeletePost),
-    call(onCreatePostComment)
+    call(onCreatePostComment),
+    call(onLikeUnlikePost)
   ]);
 }
