@@ -12,15 +12,14 @@ import Avatar from 'components/avatar/Avatar';
 
 import { Wrapper, PersonInfo, Buttons } from './VideoCallNotificationStyles';
 
-const VideoCallNotification = () => {
+const VideoCallNotification = ({ callPeer }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const currentCall = useSelector(selectVideoCallNotification);
 
   const resolveCall = () => {
-    history.push('/video-call', {
-      params: { userId: currentCall.from.id }
-    });
+    callPeer(false, currentCall.from.id);
+    history.push('/video-call');
     dispatch(videoCallNotificationReset());
   };
 
