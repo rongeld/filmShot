@@ -1,6 +1,5 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import socketIOClient from 'socket.io-client';
 import { selectConversationsData } from 'redux/messages/messages-selector';
 import { useParams } from 'react-router-dom';
 import { selectMessagesNotifications } from 'redux/notifications/notifications-selector';
@@ -12,7 +11,6 @@ import Dialog from 'components/conversations/dialog/Dialog';
 
 const Convos = () => {
   const dispatch = useDispatch();
-  const [newConversation, setNewConversation] = useState(null);
   const { id } = useParams();
   const conversations = useSelector(selectConversationsData);
   const notifications = useSelector(selectMessagesNotifications);

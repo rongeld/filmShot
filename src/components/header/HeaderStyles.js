@@ -14,6 +14,9 @@ export const RelativeBox = styled.header`
 `;
 export const LogoWrapper = styled.div`
   margin-left: -45px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(10%);
 
   @media screen and (max-width: 665px) {
     display: none;

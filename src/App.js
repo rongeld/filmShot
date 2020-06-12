@@ -1,7 +1,6 @@
 import React, { Fragment, Suspense, lazy, useEffect, useState } from 'react';
 import { Route, useLocation, Redirect, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import socketIOClient from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 import GlobalStyle, { AppWrapper } from 'styles/global-styles';
 import ProtectedRoute from 'components/routes/ProtectedRoute';
@@ -10,12 +9,15 @@ import Header from 'components/header/Header';
 import NotificationBar from 'components/notification-bar/NotificationBar';
 import { selectCurrentUser } from 'redux/user/user-selector';
 import { fetchUnreadMessagesStart } from 'redux/notifications/notifications-actions';
+import VideoCallNotification from 'components/video-call-notification/VideoCallNotification';
+import socket from 'rest/socket';
 
 const Landing = lazy(() => import('pages/landing/Landing'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
 const Profile = lazy(() => import('pages/profile/Profile'));
 const NotFoundPage = lazy(() => import('pages/not-found/NotFoundPage'));
 const Messages = lazy(() => import('pages/messages/Messages'));
+const VideoCall = lazy(() => import('pages/video-call/VideoCall'));
 
 function App() {
   const [firstAccess, setFirstAccess] = useState(true);
@@ -29,6 +31,12 @@ function App() {
       setFirstAccess(false);
     }
   }, [pathname]);
+
+  // useEffect(() => {
+  //   socket.on('end', () => {
+  //     endCall(false);
+  //   });
+  // }, []);
 
   return (
     <Fragment>
@@ -51,6 +59,7 @@ function App() {
             <ProtectedRoute path="/dashboard" exact component={Dashboard} />
             <ProtectedRoute path="/profile/:id" component={Profile} />
             <ProtectedRoute path="/messages/:id?" component={Messages} />
+            <ProtectedRoute path="/video-call/:id?" component={VideoCall} />
             {isUser && (
               <Redirect from="/profile/" to={`/profile/${isUser._id}`} />
             )}
@@ -58,6 +67,7 @@ function App() {
             <ProtectedRoute component={NotFoundPage} />
           </Switch>
         </Suspense>
+        <VideoCallNotification />
       </AppWrapper>
       <GlobalStyle />
     </Fragment>

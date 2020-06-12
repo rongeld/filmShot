@@ -4,6 +4,7 @@ import NotificationsActionTypes from './notifications-types';
 const INITIAL_STATE = {
   messages: {},
   onlineUsers: [],
+  videoCall: null,
   err: null
 };
 
@@ -25,6 +26,12 @@ const notificationsReducer = produce((draft = INITIAL_STATE, action) => {
       return draft;
     case NotificationsActionTypes.SET_ONLINE_USERS:
       draft.onlineUsers = action.payload;
+      return draft;
+    case NotificationsActionTypes.SET_VIDEO_CALL_NOTIFICATION:
+      draft.videoCall = action.payload;
+      return draft;
+    case NotificationsActionTypes.RESET_VIDEO_CALL_NOTIFICATION:
+      draft.videoCall = null;
       return draft;
     case NotificationsActionTypes.FETCH_UNREAD_MESSAGES_SUCCESS:
       // eslint-disable-next-line no-case-declarations

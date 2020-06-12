@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import socketIOClient from 'socket.io-client';
 import { NavLink } from 'react-router-dom';
 import { GoSearch } from 'react-icons/go';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,7 +10,8 @@ import { selectTotalAmountOfMessage } from 'redux/notifications/notifications-se
 import { selectCurrentUser } from 'redux/user/user-selector';
 import {
   setOnlineUsers,
-  addMessageNotification
+  addMessageNotification,
+  videoCallNotification
 } from 'redux/notifications/notifications-actions';
 import { NumberOfUnreadMessages } from 'components/notification-bar/NotificationBarStyles';
 
@@ -25,6 +25,7 @@ import {
   SearchWrapper,
   RelativeBox
 } from './HeaderStyles';
+import socket from 'rest/socket';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,6 @@ const Header = () => {
     } Film Shot`;
   }, [amountOfMessages]);
   useEffect(() => {
-    const socket = socketIOClient(process.env.REACT_APP_URL);
     socket.on('logged', data => {
       dispatch(setOnlineUsers(data));
     });
@@ -56,7 +56,15 @@ const Header = () => {
       dispatch(getConversationsStart());
     });
 
-    socket.emit('logged', { _id: isUser?._id, photo: isUser?.photo });
+    socket.on('request', data => {
+      dispatch(videoCallNotification(data));
+    });
+
+    if (isUser) {
+      const userToSend = { ...isUser };
+      delete userToSend.token;
+      socket.emit('logged', userToSend);
+    }
   }, []);
 
   return (
@@ -74,7 +82,7 @@ const Header = () => {
               ) : null}
             </RelativeBox>
           </NavLink>
-          {/* <NavLink to="/notifications">Notifications</NavLink> */}
+          <NavLink to="/video-call">Video calls</NavLink>
         </Nav>
         <LogoWrapper>
           <Logo />

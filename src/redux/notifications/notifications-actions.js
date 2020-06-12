@@ -30,3 +30,11 @@ export const setOnlineUsers = users => ({
   type: NotificationsActionTypes.SET_ONLINE_USERS,
   payload: users
 });
+
+export const videoCallNotification = users => ({
+  type: NotificationsActionTypes.SET_VIDEO_CALL_NOTIFICATION,
+  payload: users
+});
+export const videoCallNotificationReset = () => ({
+  type: NotificationsActionTypes.RESET_VIDEO_CALL_NOTIFICATION
+});

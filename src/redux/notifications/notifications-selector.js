@@ -10,6 +10,10 @@ export const selectOnlineUsers = createSelector(
   [selectNotifications],
   notifications => notifications.onlineUsers
 );
+export const selectVideoCallNotification = createSelector(
+  [selectNotifications],
+  notifications => notifications.videoCall
+);
 export const selectTotalAmountOfMessage = createSelector(
   [selectMessagesNotifications],
   messages =>

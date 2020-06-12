@@ -12,8 +12,6 @@ const Posts = () => {
   const isFetching = useSelector(selectPostsFetching);
   const currentUser = useSelector(selectCurrentUser);
 
-  console.log(posts);
-
   const fetchAllPosts = useCallback(() => dispatch(fetchPostsStart()), [
     dispatch
   ]);
