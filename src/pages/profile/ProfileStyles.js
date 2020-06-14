@@ -10,9 +10,16 @@ export const ProfileBG = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   margin-top: -30px;
+  @media screen and (max-width: 900px) {
+    height: 150px;
+  }
 `;
 export const UserPicWrapper = styled.div`
   /* position: relative; */
+
+  @media screen and (max-width: 900px) {
+    position: absolute;
+  }
 `;
 export const EditContainer = styled.div`
   display: flex;
@@ -44,4 +51,12 @@ export const UserPic = styled.div`
   align-items: center;
   transition: all 0.6s ease;
   ${({ upperPosition }) => (upperPosition ? centerPosition : normalPosition)}
+
+  @media screen and (max-width: 900px) {
+    bottom: 0px;
+    width: 100px;
+    height: 100px;
+    top: auto;
+    border: 3px solid white;
+  }
 `;

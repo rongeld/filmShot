@@ -24,11 +24,17 @@ export const Form = styled.form`
   & > div:first-child > div {
     margin-bottom: 20px;
   }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 export const FormLeft = styled.div`
-  flex: 3;
-  border-right: 1px solid lightgrey;
-  padding-right: 50px;
+  @media screen and (min-width: 900px) {
+    flex: 3;
+    border-right: 1px solid lightgrey;
+    padding-right: 50px;
+  }
 
   h4 {
     margin-bottom: 4px;
@@ -39,10 +45,19 @@ export const Col2 = styled.div`
   display: flex;
 
   & > div:first-child {
-    margin-right: 60px;
+    @media screen and (min-width: 1000px) {
+      margin-right: 60px;
+    }
+    @media screen and (max-width: 1000px) {
+      margin-bottom: 15px;
+    }
   }
 
   & > div {
     flex: 1;
+  }
+
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
   }
 `;

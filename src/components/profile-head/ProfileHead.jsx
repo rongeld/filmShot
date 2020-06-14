@@ -1,16 +1,10 @@
 import React from 'react';
 import { Nav, FlexBox } from 'components/shared/SharedStyles';
+import { Wrapper } from './ProfileHeadStyles';
 
 const ProfileHead = ({ title, amount, navs }) => {
   return (
-    <FlexBox
-      width="100%"
-      padding-left="325px"
-      padding-right="30px"
-      align-items="center"
-      justify-content="space-between"
-      margin-top="30px"
-    >
+    <Wrapper>
       <h3>
         {title} {amount ? `(${amount})` : ''}
       </h3>
@@ -19,7 +13,7 @@ const ProfileHead = ({ title, amount, navs }) => {
           <p key={idx}>{item}</p>
         ))}
       </Nav>
-    </FlexBox>
+    </Wrapper>
   );
 };
 

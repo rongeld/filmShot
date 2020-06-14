@@ -6,20 +6,25 @@ export const Body = styled.div`
   background: #272f37;
   height: 80vh;
   max-width: 400px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   width: 100%;
   flex: 2;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 
   & > * {
     color: white;
   }
+
+  @media screen and (max-width: 552px) {
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: scroll;
+    order: 2;
+  }
 `;
 
+export const TabsComponent = styled(TabList)`
+  display: flex;
+`;
 export const TabListComponent = styled(TabList)`
   list-style-type: none;
   display: flex;

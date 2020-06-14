@@ -49,7 +49,7 @@ const CreatePostModal = () => {
             }}
             id=""
             rows="5"
-            ref={register}
+            ref={register({ required: true })}
             name="description"
             placeholder="Describe photo..."
           />

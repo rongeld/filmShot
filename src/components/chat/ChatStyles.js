@@ -85,4 +85,8 @@ export const ChatWrapper = styled.div`
   flex: 5;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 552px) {
+    height: 80vh;
+  }
 `;

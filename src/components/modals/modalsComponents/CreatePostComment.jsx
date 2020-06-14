@@ -42,7 +42,7 @@ const CreatePostComment = () => {
   return (
     <Box>
       <Image imageUrl={postDetails.photo} />
-      <CommentsWrapper>
+      <CommentsWrapper imageUrl={postDetails.photo}>
         <UserComments>
           <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
             {postDetails.comments.length ? (

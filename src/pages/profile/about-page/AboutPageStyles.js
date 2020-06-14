@@ -7,6 +7,10 @@ export const TabsComponent = styled(Tabs)`
   margin-top: 30px;
   width: 100%;
   align-items: flex-start;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+  }
 `;
 
 export const TabListComponent = styled(TabList)`
@@ -40,6 +44,10 @@ export const TabPanelComponent = styled(TabPanel)`
     background: white;
     opacity: 1;
 
+    @media screen and (max-width: 650px) {
+      width: 100%;
+    }
+
     & > div:first-child {
       padding: 30px 50px 0px;
     }
@@ -54,5 +62,21 @@ export const TabPanelComponent = styled(TabPanel)`
       margin-top: 0;
       font-weight: 500;
     }
+  }
+`;
+
+export const Box = styled.div`
+  margin-right: 30px;
+  background: white;
+  box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
+  padding: 20px;
+  display: flex;
+  max-width: 290px;
+  width: 100%;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+    max-width: 100%;
+    margin-bottom: 20px;
   }
 `;

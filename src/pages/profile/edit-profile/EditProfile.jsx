@@ -25,6 +25,8 @@ import {
   TextArea
 } from './EditProfileStyles';
 
+import { Box } from 'pages/profile/about-page/AboutPageStyles';
+
 const EditProfile = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isLoading = useSelector(selectCurrentUserLoading);
@@ -78,14 +80,14 @@ const EditProfile = () => {
   return (
     <Container>
       <TabsComponent>
-        <FlexBox shadow margin-right="30px" max-width="290px" width="100%" pd>
+        <Box>
           <TabListComponent>
             <TabComponent>Personal Information</TabComponent>
             <TabComponent>Photos</TabComponent>
-            <TabComponent>Password</TabComponent>
-            <TabComponent>Contact Details</TabComponent>
+            {/* <TabComponent>Password</TabComponent>
+            <TabComponent>Contact Details</TabComponent> */}
           </TabListComponent>
-        </FlexBox>
+        </Box>
 
         <TabPanelComponent>
           <div>

@@ -7,6 +7,10 @@ export const Box = styled.div`
 
   & > div:first-child {
     flex: 2;
+
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
   }
   & > div:last-child {
     flex: 1;

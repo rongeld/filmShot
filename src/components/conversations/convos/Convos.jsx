@@ -9,6 +9,8 @@ import {
 } from 'redux/messages/messages-actions';
 import Dialog from 'components/conversations/dialog/Dialog';
 
+import { Wrapper } from './ConvosStyles';
+
 const Convos = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -29,7 +31,7 @@ const Convos = () => {
     }
   }, [id]);
   return (
-    <div>
+    <Wrapper>
       {conversations.map(item => (
         <Dialog
           key={item._id}
@@ -39,7 +41,7 @@ const Convos = () => {
           newMessages={notifications[item.recipients[0]]}
         />
       ))}
-    </div>
+    </Wrapper>
   );
 };
 

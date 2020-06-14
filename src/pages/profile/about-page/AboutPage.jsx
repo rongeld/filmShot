@@ -7,7 +7,8 @@ import {
   TabListComponent,
   TabsComponent,
   TabPanelComponent,
-  TabComponent
+  TabComponent,
+  Box
 } from './AboutPageStyles';
 
 const AboutPage = ({ about, camera, interests }) => {
@@ -15,14 +16,14 @@ const AboutPage = ({ about, camera, interests }) => {
     <Container column>
       <ProfileHead title="About" navs={['Facebook', 'Twitter', 'Pinterest']} />
       <TabsComponent>
-        <FlexBox shadow margin-right="30px" max-width="290px" width="100%" pd>
+        <Box>
           <TabListComponent>
             <TabComponent>About me</TabComponent>
             <TabComponent>Camera</TabComponent>
             <TabComponent>Interests</TabComponent>
             {/* <TabComponent>Contact Details</TabComponent> */}
           </TabListComponent>
-        </FlexBox>
+        </Box>
 
         <TabPanelComponent>
           <div>

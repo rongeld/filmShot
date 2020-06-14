@@ -5,4 +5,9 @@ export const Box = styled.div`
   height: 80vh;
   width: 100%;
   box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
+
+  @media screen and (max-width: 552px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;

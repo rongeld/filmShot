@@ -6,6 +6,10 @@ export const ImagesGrid = styled.div`
   column-count: 4;
   column-gap: 5px;
 
+  @media screen and (max-width: 650px) {
+    column-count: 2;
+  }
+
   img {
     width: 100%;
     height: auto;

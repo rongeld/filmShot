@@ -6,6 +6,8 @@ import { fetchUsersStart } from 'redux/users/users-actions';
 import Loading from 'components/loading-component/Loading';
 import Dialog from '../dialog/Dialog';
 
+import { Wrapper } from '../convos/ConvosStyles';
+
 const Users = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectUsersData);
@@ -20,7 +22,7 @@ const Users = () => {
   }, [fetchAllUsers]);
 
   return (
-    <div>
+    <Wrapper>
       {isFetching ? (
         <Loading noPadding />
       ) : (
@@ -28,7 +30,7 @@ const Users = () => {
           .filter(item => item._id !== currentUser._id)
           .map(item => <Dialog {...item} noConvo />)
       )}
-    </div>
+    </Wrapper>
   );
 };
 
