@@ -27,6 +27,12 @@ const Profile = lazy(() => import('pages/profile/Profile'));
 const NotFoundPage = lazy(() => import('pages/not-found/NotFoundPage'));
 const Messages = lazy(() => import('pages/messages/Messages'));
 const VideoCall = lazy(() => import('pages/video-call/VideoCall'));
+const SetNewPassword = lazy(() =>
+  import('pages/set-new-password/SetNewPassword')
+);
+const ForgotPassword = lazy(() =>
+  import('pages/forgot-password/ForgotPassword')
+);
 
 function App() {
   const [firstAccess, setFirstAccess] = useState(true);
@@ -93,14 +99,38 @@ function App() {
   return (
     <Fragment>
       <AppWrapper>
-        <Route render={() => pathname !== '/landing' && <Header />} />
-        <Route render={() => pathname !== '/landing' && <NotificationBar />} />
+        <Route
+          render={() =>
+            pathname !== '/forgot-password' &&
+            !pathname.includes('update-password') &&
+            pathname !== '/landing' && <Header />
+          }
+        />
+        <Route
+          render={() =>
+            pathname !== '/forgot-password' &&
+            !pathname.includes('update-password') &&
+            pathname !== '/landing' && <NotificationBar />
+          }
+        />
         <Suspense fallback={<Loading />}>
           <Switch>
             <Route
               path="/landing"
               component={() =>
                 isUser ? <Redirect to="/dashboard" /> : <Landing />
+              }
+            />
+            <Route
+              path="/forgot-password"
+              component={() =>
+                isUser ? <Redirect to="/dashboard" /> : <ForgotPassword />
+              }
+            />
+            <Route
+              path="/update-password/:id"
+              component={() =>
+                isUser ? <Redirect to="/dashboard" /> : <SetNewPassword />
               }
             />
             <ProtectedRoute

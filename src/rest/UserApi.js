@@ -29,6 +29,24 @@ class UserAPI {
     const response = await Api.get('/users');
     return response;
   }
+
+  static async forgotPasswordHandler(data) {
+    const response = await Api.post(
+      '/users/forgotPassword',
+      { email: data },
+      true
+    );
+    return response;
+  }
+
+  static async updatePassword({ id, password }) {
+    const response = await Api.patch(
+      `/users/resetPassword/${id}`,
+      { password },
+      true
+    );
+    return response;
+  }
 }
 
 export default UserAPI;

@@ -62,6 +62,12 @@ export const SignUpForm = styled.form`
   & > div {
     margin-bottom: 20px;
   }
+
+  a {
+    text-align: center;
+    margin-top: 20px;
+    color: ${variables['theme-color']};
+  }
 `;
 export const FormHeader = styled.div`
   background: ${variables['theme-color']};

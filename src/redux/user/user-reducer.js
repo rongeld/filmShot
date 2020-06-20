@@ -8,7 +8,9 @@ const INITIAL_STATE = {
     data: null
   },
   error: null,
-  isLoading: [false, false]
+  isLoading: [false, false],
+  forgetPasswordLoading: false,
+  passwordDropped: false
 };
 
 const userReducer = produce((draft = INITIAL_STATE, action) => {
@@ -22,6 +24,7 @@ const userReducer = produce((draft = INITIAL_STATE, action) => {
       return draft;
     case UserActionTypes.SIGN_IN_SUCCESS:
       draft.currentUser = action.payload;
+      draft.forgetPasswordLoading = false;
       draft.error = null;
       draft.isLoading = [false, false];
       return draft;
@@ -36,6 +39,18 @@ const userReducer = produce((draft = INITIAL_STATE, action) => {
     case UserActionTypes.SIGN_OUT:
       draft = INITIAL_STATE;
       return draft;
+    case UserActionTypes.FORGOT_PASSWORD_START:
+    case UserActionTypes.UPDATE_PASSWORD_START:
+      draft.forgetPasswordLoading = true;
+      return draft;
+    case UserActionTypes.FORGOT_PASSWORD_CLEAR:
+      draft.forgetPasswordLoading = false;
+      draft.passwordDropped = false;
+      return draft;
+    case UserActionTypes.FORGOT_PASSWORD_SUCCESS:
+      draft.forgetPasswordLoading = false;
+      draft.passwordDropped = true;
+      return draft;
     case UserActionTypes.REMOVE_SINGLE_USER:
       draft.user.data = null;
       draft.user.loading = false;
@@ -49,7 +64,10 @@ const userReducer = produce((draft = INITIAL_STATE, action) => {
     case UserActionTypes.SIGN_UP_FAILURE:
     case UserActionTypes.GET_SINGLE_USER_FAILURE:
     case UserActionTypes.UPDATE_ME_FAILURE:
+    case UserActionTypes.UPDATE_PASSWORD_FAILURE:
+    case UserActionTypes.FORGOT_PASSWORD_FAILURE:
       draft.error = action.payload;
+      draft.forgetPasswordLoading = false;
       draft.isLoading = [false, false];
       draft.user.loading = false;
       return draft;

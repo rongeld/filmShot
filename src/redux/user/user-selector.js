@@ -18,3 +18,11 @@ export const selectCurrentUserLoading = createSelector(
   [selectUser],
   user => user.isLoading
 );
+export const selectForgotPasswordLoading = createSelector(
+  [selectUser],
+  user => user.forgetPasswordLoading
+);
+export const selectForgotPasswordStatus = createSelector(
+  [selectUser],
+  user => user.passwordDropped
+);

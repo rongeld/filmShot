@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-wrap-multilines */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-
+import { Link } from 'react-router-dom';
 import LandingBG from 'assets/landingBG.jpg';
 import Logo from 'components/logo/Logo';
 import Input from 'components/form/Input/Input';
@@ -10,7 +10,11 @@ import SelectForm from 'components/form/select/SelectForm';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectCurrentUserLoading } from 'redux/user/user-selector';
-import { signUpStart, emailSignInStart } from 'redux/user/user-actions';
+import {
+  signUpStart,
+  emailSignInStart,
+  forgotPasswordClear
+} from 'redux/user/user-actions';
 import { age, gender, country } from 'utils/enums';
 import {
   Header,
@@ -35,6 +39,10 @@ const Landing = () => {
   } = useForm({
     mode: 'onBlur'
   });
+
+  useEffect(() => {
+    forgotPasswordClear();
+  }, [forgotPasswordClear]);
 
   const onSubmit = ({ email, password }) => {
     dispatch(emailSignInStart({ email, password }));
@@ -196,6 +204,7 @@ const Landing = () => {
               <CustomBtn isLoading={isLoading[0]} type="submit" fullwidth>
                 Create Account
               </CustomBtn>
+              <Link to="/forgot-password">Forgot password</Link>
             </SignUpForm>
           </FromWrapper>
         </Container>

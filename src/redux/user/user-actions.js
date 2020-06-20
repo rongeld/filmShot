@@ -1,4 +1,5 @@
 import UserActionTypes from './user-types';
+import { ErrorMessage } from 'react-hook-form';
 
 export const signInSuccess = user => ({
   type: UserActionTypes.SIGN_IN_SUCCESS,
@@ -75,5 +76,33 @@ export const getSingleUserSuccess = user => ({
 });
 export const getSingleUserFailure = err => ({
   type: UserActionTypes.GET_SINGLE_USER_FAILURE,
+  payload: err
+});
+
+export const forgotPasswordStart = email => ({
+  type: UserActionTypes.FORGOT_PASSWORD_START,
+  payload: email
+});
+export const forgotPasswordSuccess = () => ({
+  type: UserActionTypes.FORGOT_PASSWORD_SUCCESS
+});
+export const forgotPasswordError = err => ({
+  type: UserActionTypes.FORGOT_PASSWORD_FAILURE,
+  payload: err
+});
+export const forgotPasswordClear = () => ({
+  type: UserActionTypes.FORGOT_PASSWORD_CLEAR
+});
+
+export const updatePasswordStart = data => ({
+  type: UserActionTypes.UPDATE_PASSWORD_START,
+  payload: data
+});
+export const updatePasswordSuccess = user => ({
+  type: UserActionTypes.UPDATE_PASSWORD_SUCCESS,
+  payload: user
+});
+export const updatePasswordFailure = err => ({
+  type: UserActionTypes.UPDATE_PASSWORD_FAILURE,
   payload: err
 });

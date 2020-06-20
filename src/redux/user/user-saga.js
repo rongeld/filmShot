@@ -9,7 +9,11 @@ import {
   updateMeSuccess,
   getSingleUserSuccess,
   getSingleUserFailure,
-  updateMeFailure
+  updateMeFailure,
+  forgotPasswordSuccess,
+  forgotPasswordError,
+  updatePasswordSuccess,
+  updatePasswordFailure
 } from './user-actions';
 
 export function* signUp({ payload }) {
@@ -55,6 +59,26 @@ export function* getSingleUser({ payload }) {
     yield put(getSingleUserFailure(err));
   }
 }
+export function* forgotPassword({ payload }) {
+  try {
+    yield UserAPI.forgotPasswordHandler(payload);
+    yield put(forgotPasswordSuccess());
+  } catch (err) {
+    yield put(forgotPasswordError(err));
+  }
+}
+export function* updatePassword({ payload }) {
+  try {
+    const { token, user } = yield UserAPI.updatePassword(payload);
+    const userToSafe = {
+      token,
+      ...user
+    };
+    yield put(signInSuccess(userToSafe));
+  } catch (err) {
+    yield put(updatePasswordFailure(err));
+  }
+}
 
 export function* onSignUpStart() {
   yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
@@ -68,12 +92,20 @@ export function* onUpdateMeStart() {
 export function* onGetSingleUser() {
   yield takeLatest(UserActionTypes.GET_SINGLE_USER_START, getSingleUser);
 }
+export function* onForgotPassword() {
+  yield takeLatest(UserActionTypes.FORGOT_PASSWORD_START, forgotPassword);
+}
+export function* onUpdatePassword() {
+  yield takeLatest(UserActionTypes.UPDATE_PASSWORD_START, updatePassword);
+}
 
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
     call(onSignInStart),
     call(onUpdateMeStart),
-    call(onGetSingleUser)
+    call(onGetSingleUser),
+    call(onForgotPassword),
+    call(onUpdatePassword)
   ]);
 }

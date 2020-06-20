@@ -49,11 +49,21 @@ const VideoCallNotification = ({ callPeer }) => {
               </PersonInfo>
 
               <Buttons>
-                <div onClick={resolveCall}>
+                <div
+                  tabIndex={0}
+                  role="button"
+                  onClick={resolveCall}
+                  onKeyDown={resolveCall}
+                >
                   <BsCameraVideoFill />
                 </div>
 
-                <div onClick={rejectCall}>
+                <div
+                  tabIndex={0}
+                  role="button"
+                  onClick={rejectCall}
+                  onKeyDown={rejectCall}
+                >
                   <MdCallEnd />
                 </div>
               </Buttons>
