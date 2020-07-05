@@ -1,2 +1,2 @@
-MERN stack social network using socket.io. 
+MERN stack social network (with socket.io and WebRTC). 
 https://film-shot.web.app
